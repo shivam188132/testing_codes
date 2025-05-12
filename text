@@ -1,0 +1,1442 @@
+shivam@shivam-Bravo-15-B5DD:~$ grep -nE '\$|\.' /etc/grub.d/*
+/etc/grub.d/00_header:4:# grub-mkconfig helper script.
+/etc/grub.d/00_header:5:# Copyright (C) 2006,2007,2008,2009,2010  Free Software Foundation, Inc.
+/etc/grub.d/00_header:10:# (at your option) any later version.
+/etc/grub.d/00_header:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/00_header:15:# GNU General Public License for more details.
+/etc/grub.d/00_header:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/00_header:23:grub_lang=`echo $LANG | cut -d . -f 1`
+/etc/grub.d/00_header:28:export TEXTDOMAINDIR="${datarootdir}/locale"
+/etc/grub.d/00_header:30:. "$pkgdatadir/grub-mkconfig_lib"
+/etc/grub.d/00_header:32:# Do this as early as possible, since other commands might depend on it.
+/etc/grub.d/00_header:33:# (e.g. the `loadfont' command might need lvm or raid modules)
+/etc/grub.d/00_header:34:for i in ${GRUB_PRELOAD_MODULES} ; do
+/etc/grub.d/00_header:35:  echo "insmod $i"
+/etc/grub.d/00_header:38:if [ "x${GRUB_DEFAULT}" = "x" ] ; then GRUB_DEFAULT=0 ; fi
+/etc/grub.d/00_header:39:if [ "x${GRUB_DEFAULT}" = "xsaved" ] ; then GRUB_DEFAULT='${saved_entry}' ; fi
+/etc/grub.d/00_header:40:if [ "x${GRUB_TIMEOUT}" = "x" ] ; then GRUB_TIMEOUT=5 ; fi
+/etc/grub.d/00_header:41:if [ "x${GRUB_GFXMODE}" = "x" ] ; then GRUB_GFXMODE=auto ; fi
+/etc/grub.d/00_header:43:if [ "x${GRUB_DEFAULT_BUTTON}" = "x" ] ; then GRUB_DEFAULT_BUTTON="$GRUB_DEFAULT" ; fi
+/etc/grub.d/00_header:44:if [ "x${GRUB_DEFAULT_BUTTON}" = "xsaved" ] ; then GRUB_DEFAULT_BUTTON='${saved_entry}' ; fi
+/etc/grub.d/00_header:45:if [ "x${GRUB_TIMEOUT_BUTTON}" = "x" ] ; then GRUB_TIMEOUT_BUTTON="$GRUB_TIMEOUT" ; fi
+/etc/grub.d/00_header:48:if [ -s \$prefix/grubenv ]; then
+/etc/grub.d/00_header:54:if [ "\${initrdfail}" = 2 ]; then
+/etc/grub.d/00_header:56:elif [ "\${initrdfail}" = 1 ]; then
+/etc/grub.d/00_header:57:   set next_entry="\${prev_entry}"
+/etc/grub.d/00_header:60:   if [ "\${next_entry}" ]; then
+/etc/grub.d/00_header:65:if [ "x$GRUB_BUTTON_CMOS_ADDRESS" != "x" ]; then
+/etc/grub.d/00_header:67:if cmostest $GRUB_BUTTON_CMOS_ADDRESS ; then
+/etc/grub.d/00_header:68:   set default="${GRUB_DEFAULT_BUTTON}"
+/etc/grub.d/00_header:69:elif [ "\${next_entry}" ] ; then
+/etc/grub.d/00_header:70:   set default="\${next_entry}"
+/etc/grub.d/00_header:75:   set default="${GRUB_DEFAULT}"
+/etc/grub.d/00_header:80:if [ "\${next_entry}" ] ; then
+/etc/grub.d/00_header:81:   set default="\${next_entry}"
+/etc/grub.d/00_header:86:   set default="${GRUB_DEFAULT}"
+/etc/grub.d/00_header:92:if [ x"\${feature_menuentry_id}" = xy ]; then
+/etc/grub.d/00_header:100:if [ "\${prev_saved_entry}" ]; then
+/etc/grub.d/00_header:101:  set saved_entry="\${prev_saved_entry}"
+/etc/grub.d/00_header:109:  if [ -z "\${boot_once}" ]; then
+/etc/grub.d/00_header:110:    saved_entry="\${chosen}"
+/etc/grub.d/00_header:118:    if [ -n "${have_grubenv}" ]; then if [ -n "${partuuid}" ]; then
+/etc/grub.d/00_header:119:      if [ -z "${initrdfail}" ]; then
+/etc/grub.d/00_header:121:        if [ -n "${boot_once}" ]; then
+/etc/grub.d/00_header:122:          set prev_entry="${default}"
+/etc/grub.d/00_header:131:if [ "$quick_boot" = 1 ]; then
+/etc/grub.d/00_header:138:    abstractions="$(grub-probe --target=abstraction "${grubdir}")"
+/etc/grub.d/00_header:139:    for abstraction in $abstractions; do
+/etc/grub.d/00_header:140:      case "$abstraction" in
+/etc/grub.d/00_header:143:  # GRUB lacks write support for $abstraction, so recordfail support is disabled.
+/etc/grub.d/00_header:150:    FS="$(grub-probe --target=fs "${grubdir}")"
+/etc/grub.d/00_header:151:    case "$FS" in
+/etc/grub.d/00_header:154:  # GRUB lacks write support for $FS, so recordfail support is disabled.
+/etc/grub.d/00_header:161:  if [ -n "\${have_grubenv}" ]; then if [ -z "\${boot_once}" ]; then save_env recordfail; fi; fi
+/etc/grub.d/00_header:177:if [ -n "${GRUB_VIDEO_BACKEND}" ]; then
+/etc/grub.d/00_header:179:  insmod ${GRUB_VIDEO_BACKEND}
+/etc/grub.d/00_header:182:# If all_video.mod isn't available load all modules available
+/etc/grub.d/00_header:183:# with versions prior to introduction of all_video.mod
+/etc/grub.d/00_header:185:  if [ x\$feature_all_video_module = xy ]; then
+/etc/grub.d/00_header:205:for x in ${GRUB_TERMINAL_INPUT} ${GRUB_TERMINAL_OUTPUT}; do
+/etc/grub.d/00_header:206:    if [ xserial = "x$x" ]; then
+/etc/grub.d/00_header:209:    if [ xgfxterm = "x$x" ]; then
+/etc/grub.d/00_header:214:if [ "x$serial" = x1 ]; then
+/etc/grub.d/00_header:215:    if [ "x${GRUB_SERIAL_COMMAND}" = "x" ] ; then
+/etc/grub.d/00_header:216:	grub_warn "$(gettext "Requested serial terminal but GRUB_SERIAL_COMMAND is unspecified. Default parameters will be used.")"
+/etc/grub.d/00_header:219:    echo "${GRUB_SERIAL_COMMAND}"
+/etc/grub.d/00_header:222:if [ "x$gfxterm" = x1 ]; then
+/etc/grub.d/00_header:223:    if [ -n "$GRUB_FONT" ] ; then
+/etc/grub.d/00_header:225:       prepare_grub_to_access_device `${grub_probe} --target=device "${GRUB_FONT}"`
+/etc/grub.d/00_header:227:if loadfont `make_system_path_relative_to_its_root "${GRUB_FONT}"` ; then
+/etc/grub.d/00_header:230:	for dir in "${pkgdatadir}" "`echo '/boot/grub' | sed "s,//*,/,g"`" /usr/share/grub ; do
+/etc/grub.d/00_header:232:		path="${dir}/${basename}.pf2"
+/etc/grub.d/00_header:233:		if is_path_readable_by_grub "${path}" > /dev/null ; then
+/etc/grub.d/00_header:234:		    font_path="${path}"
+/etc/grub.d/00_header:241:	if [ -n "${font_path}" ] ; then
+/etc/grub.d/00_header:243:if [ x\$feature_default_font_path = xy ] ; then
+/etc/grub.d/00_header:248:		prepare_grub_to_access_device `${grub_probe} --target=device "${font_path}"`
+/etc/grub.d/00_header:250:    font="`make_system_path_relative_to_its_root "${font_path}"`"
+/etc/grub.d/00_header:253:if loadfont \$font ; then
+/etc/grub.d/00_header:263:  set gfxmode=${GRUB_GFXMODE}
+/etc/grub.d/00_header:269:if [ "x${grub_lang}" != "xC" ] && [ "x${LANG}" != "xPOSIX" ] && [ "x${LANG}" != "x" ]; then
+/etc/grub.d/00_header:271:  set locale_dir=\$prefix/locale
+/etc/grub.d/00_header:272:  set lang=${grub_lang}
+/etc/grub.d/00_header:282:case x${GRUB_TERMINAL_INPUT} in
+/etc/grub.d/00_header:288:terminal_input ${GRUB_TERMINAL_INPUT}
+/etc/grub.d/00_header:293:case x${GRUB_TERMINAL_OUTPUT} in
+/etc/grub.d/00_header:299:terminal_output ${GRUB_TERMINAL_OUTPUT}
+/etc/grub.d/00_header:304:if [ "x$gfxterm" = x1 ]; then
+/etc/grub.d/00_header:305:    if [ "x$GRUB_THEME" != x ] && [ -f "$GRUB_THEME" ] \
+/etc/grub.d/00_header:306:	&& is_path_readable_by_grub "$GRUB_THEME"; then
+/etc/grub.d/00_header:307:	gettext_printf "Found theme: %s\n" "$GRUB_THEME" >&2
+/etc/grub.d/00_header:309:	prepare_grub_to_access_device `${grub_probe} --target=device "$GRUB_THEME"`
+/etc/grub.d/00_header:313:	themedir="`dirname "$GRUB_THEME"`"
+/etc/grub.d/00_header:314:	for x in "$themedir"/*.pf2 "$themedir"/f/*.pf2; do
+/etc/grub.d/00_header:315:	    if [ -f "$x" ]; then
+/etc/grub.d/00_header:317:loadfont (\$root)`make_system_path_relative_to_its_root $x`
+/etc/grub.d/00_header:321:	if [ x"`echo "$themedir"/*.jpg`" != x"$themedir/*.jpg" ] || [ x"`echo "$themedir"/*.jpeg`" != x"$themedir/*.jpeg" ]; then
+/etc/grub.d/00_header:326:	if [ x"`echo "$themedir"/*.png`" != x"$themedir/*.png" ]; then
+/etc/grub.d/00_header:331:	if [ x"`echo "$themedir"/*.tga`" != x"$themedir/*.tga" ]; then
+/etc/grub.d/00_header:338:set theme=(\$root)`make_system_path_relative_to_its_root $GRUB_THEME`
+/etc/grub.d/00_header:341:    elif [ "x$GRUB_BACKGROUND" != x ] && [ -f "$GRUB_BACKGROUND" ] \
+/etc/grub.d/00_header:342:	    && is_path_readable_by_grub "$GRUB_BACKGROUND"; then
+/etc/grub.d/00_header:343:	gettext_printf "Found background: %s\n" "$GRUB_BACKGROUND" >&2
+/etc/grub.d/00_header:344:	case "$GRUB_BACKGROUND" in 
+/etc/grub.d/00_header:345:	    *.png)         reader=png ;;
+/etc/grub.d/00_header:346:	    *.tga)         reader=tga ;;
+/etc/grub.d/00_header:347:	    *.jpg|*.jpeg)  reader=jpeg ;;
+/etc/grub.d/00_header:350:	prepare_grub_to_access_device `${grub_probe} --target=device "$GRUB_BACKGROUND"`
+/etc/grub.d/00_header:352:insmod $reader
+/etc/grub.d/00_header:353:background_image -m stretch `make_system_path_relative_to_its_root "$GRUB_BACKGROUND"`
+/etc/grub.d/00_header:361:if [ "\${recordfail}" = 1 ] ; then
+/etc/grub.d/00_header:362:  set timeout=${GRUB_RECORDFAIL_TIMEOUT:-30}
+/etc/grub.d/00_header:365:    if [ "x${3}" != "x" ] ; then
+/etc/grub.d/00_header:366:	timeout="${2}"
+/etc/grub.d/00_header:367:	style="${3}"
+/etc/grub.d/00_header:368:    elif [ "x${1}" != "x" ] && \
+/etc/grub.d/00_header:369:	 ([ "$quick_boot" = 1 ] || [ "x${1}" != "x0" ]) ; then
+/etc/grub.d/00_header:370:	# Handle the deprecated GRUB_HIDDEN_TIMEOUT scheme.
+/etc/grub.d/00_header:371:	timeout="${1}"
+/etc/grub.d/00_header:372:	if [ "x${2}" != "x0" ] ; then
+/etc/grub.d/00_header:373:	    grub_warn "$(gettext "Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is set is no longer supported.")"
+/etc/grub.d/00_header:375:	if [ "x${GRUB_HIDDEN_TIMEOUT_QUIET}" = "xtrue" ] ; then
+/etc/grub.d/00_header:384:	timeout="${2}"
+/etc/grub.d/00_header:388:  if [ x\$feature_timeout_style = xy ] ; then
+/etc/grub.d/00_header:389:    set timeout_style=${style}
+/etc/grub.d/00_header:390:    set timeout=${timeout}
+/etc/grub.d/00_header:392:    if [ "x${style}" = "xmenu" ] ; then
+/etc/grub.d/00_header:395:  # unavailable.
+/etc/grub.d/00_header:397:    set timeout=${timeout}
+/etc/grub.d/00_header:402:  # unavailable.
+/etc/grub.d/00_header:403:  elif sleep${verbose} --interruptible ${timeout} ; then
+/etc/grub.d/00_header:411:if [ "$recordfail_broken" = 1 ]; then
+/etc/grub.d/00_header:413:if [ \$grub_platform = efi ]; then
+/etc/grub.d/00_header:414:  set timeout=${GRUB_RECORDFAIL_TIMEOUT:-30}
+/etc/grub.d/00_header:415:  if [ x\$feature_timeout_style = xy ] ; then
+/etc/grub.d/00_header:423:if [ "x$GRUB_BUTTON_CMOS_ADDRESS" != "x" ]; then
+/etc/grub.d/00_header:425:if cmostest $GRUB_BUTTON_CMOS_ADDRESS ; then
+/etc/grub.d/00_header:427:make_timeout "${GRUB_HIDDEN_TIMEOUT_BUTTON}" "${GRUB_TIMEOUT_BUTTON}" "${GRUB_TIMEOUT_STYLE_BUTTON}"
+/etc/grub.d/00_header:429:make_timeout "${GRUB_HIDDEN_TIMEOUT}" "${GRUB_TIMEOUT}" "${GRUB_TIMEOUT_STYLE}"
+/etc/grub.d/00_header:432:make_timeout "${GRUB_HIDDEN_TIMEOUT}" "${GRUB_TIMEOUT}" "${GRUB_TIMEOUT_STYLE}"
+/etc/grub.d/00_header:435:if [ "x$GRUB_BUTTON_CMOS_ADDRESS" != "x" ] && [ "x$GRUB_BUTTON_CMOS_CLEAN" = "xyes" ]; then
+/etc/grub.d/00_header:437:cmosclean $GRUB_BUTTON_CMOS_ADDRESS
+/etc/grub.d/00_header:442:if [ "x${GRUB_INIT_TUNE}" != "x" ] ; then
+/etc/grub.d/00_header:443:  echo "play ${GRUB_INIT_TUNE}"
+/etc/grub.d/00_header:446:if [ "x${GRUB_BADRAM}" != "x" ] ; then
+/etc/grub.d/00_header:447:  echo "badram ${GRUB_BADRAM}"
+/etc/grub.d/05_debian_theme:4:# grub-mkconfig helper script.
+/etc/grub.d/05_debian_theme:5:# Copyright (C) 2010  Alexander Kurtz <kurtz.alex@googlemail.com>
+/etc/grub.d/05_debian_theme:10:# (at your option) any later version.
+/etc/grub.d/05_debian_theme:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/05_debian_theme:15:# GNU General Public License for more details.
+/etc/grub.d/05_debian_theme:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/05_debian_theme:20:# Include the GRUB helper library for grub-mkconfig.
+/etc/grub.d/05_debian_theme:21:. /usr/share/grub/grub-mkconfig_lib
+/etc/grub.d/05_debian_theme:23:# We want to work in /boot/grub/ only.
+/etc/grub.d/05_debian_theme:26:# Set the location of a possibly necessary cache file for the background image.
+/etc/grub.d/05_debian_theme:27:# NOTE: This MUST BE A DOTFILE to avoid confusing it with user-defined images.
+/etc/grub.d/05_debian_theme:28:BACKGROUND_CACHE=".background_cache"
+/etc/grub.d/05_debian_theme:31:	case $GRUB_DISTRIBUTOR in
+/etc/grub.d/05_debian_theme:33:			# Set a monochromatic theme for Tanglu/Ubuntu.
+/etc/grub.d/05_debian_theme:34:			echo "${1}set menu_color_normal=white/black"
+/etc/grub.d/05_debian_theme:35:			echo "${1}set menu_color_highlight=black/light-gray"
+/etc/grub.d/05_debian_theme:37:			if [ -e /usr/share/plymouth/themes/default.grub ]; then
+/etc/grub.d/05_debian_theme:38:				sed "s/^/${1}/" /usr/share/plymouth/themes/default.grub
+/etc/grub.d/05_debian_theme:40:			# For plymouth backward compatibility. Can be removed
+/etc/grub.d/05_debian_theme:41:			# after xenial.
+/etc/grub.d/05_debian_theme:42:			if [ -e /lib/plymouth/themes/default.grub ]; then
+/etc/grub.d/05_debian_theme:43:				sed "s/^/${1}/" /lib/plymouth/themes/default.grub
+/etc/grub.d/05_debian_theme:47:			# Set the traditional Debian blue theme.
+/etc/grub.d/05_debian_theme:48:			echo "${1}set menu_color_normal=cyan/blue"
+/etc/grub.d/05_debian_theme:49:			echo "${1}set menu_color_highlight=white/blue"
+/etc/grub.d/05_debian_theme:56:	for module in "${1}.mod" */"${1}.mod"; do
+/etc/grub.d/05_debian_theme:57:		if [ -f "${module}" ]; then
+/etc/grub.d/05_debian_theme:65:	# Step #1: Search all available output modes ...
+/etc/grub.d/05_debian_theme:67:	for output in ${GRUB_TERMINAL_OUTPUT}; do
+/etc/grub.d/05_debian_theme:68:		if [ "x$output" = "xgfxterm" ]; then
+/etc/grub.d/05_debian_theme:73:	# ... and check if we are able to display a background image at all.
+/etc/grub.d/05_debian_theme:74:	if ! [ "x${output}" = "xgfxterm" ]; then
+/etc/grub.d/05_debian_theme:78:	# Step #2: Check if the specified background image exists.
+/etc/grub.d/05_debian_theme:79:	if ! [ -f "${1}" ]; then
+/etc/grub.d/05_debian_theme:83:	# Step #3: Search the correct GRUB module for our background image.
+/etc/grub.d/05_debian_theme:85:	case "${1}" in
+/etc/grub.d/05_debian_theme:86:		*.jpg|*.JPG|*.jpeg|*.JPEG) reader="jpeg";;
+/etc/grub.d/05_debian_theme:87:		*.png|*.PNG) reader="png";;
+/etc/grub.d/05_debian_theme:88:		*.tga|*.TGA) reader="tga";;
+/etc/grub.d/05_debian_theme:89:		*) return 3;; # Unknown image type.
+/etc/grub.d/05_debian_theme:92:	# Step #4: Check if the necessary GRUB module is available.
+/etc/grub.d/05_debian_theme:93:	if ! module_available "${reader}"; then
+/etc/grub.d/05_debian_theme:97:	# Step #5: Check if GRUB can read the background image directly.
+/etc/grub.d/05_debian_theme:98:	# If so, we can remove the cache file (if any). Otherwise the background
+/etc/grub.d/05_debian_theme:99:	# image needs to be cached under /boot/grub/.
+/etc/grub.d/05_debian_theme:100:	if is_path_readable_by_grub "${1}"; then
+/etc/grub.d/05_debian_theme:101:		rm --force "${BACKGROUND_CACHE}.jpeg" \
+/etc/grub.d/05_debian_theme:102:			"${BACKGROUND_CACHE}.png" "${BACKGROUND_CACHE}.tga"
+/etc/grub.d/05_debian_theme:103:	elif cp "${1}" "${BACKGROUND_CACHE}.${reader}"; then
+/etc/grub.d/05_debian_theme:104:		set -- "${BACKGROUND_CACHE}.${reader}" "${2}" "${3}"
+/etc/grub.d/05_debian_theme:109:	# Step #6: Prepare GRUB to read the background image.
+/etc/grub.d/05_debian_theme:110:	if ! prepare_grub_to_access_device "`${grub_probe} --target=device "${1}"`"; then
+/etc/grub.d/05_debian_theme:114:	# Step #7: Everything went fine, print out a message to stderr ...
+/etc/grub.d/05_debian_theme:115:	echo "Found background image: ${1}" >&2
+/etc/grub.d/05_debian_theme:117:	# ... and write our configuration snippet to stdout. Use the colors
+/etc/grub.d/05_debian_theme:118:	# desktop-base specified. If we're using a user-defined background, use
+/etc/grub.d/05_debian_theme:119:	# the default colors since we've got no idea how the image looks like.
+/etc/grub.d/05_debian_theme:120:	# If loading the background image fails, use the default theme.
+/etc/grub.d/05_debian_theme:121:	echo "insmod ${reader}"
+/etc/grub.d/05_debian_theme:122:	echo "if background_image `make_system_path_relative_to_its_root "${1}"`; then"
+/etc/grub.d/05_debian_theme:123:	if [ -n "${2}" ]; then
+/etc/grub.d/05_debian_theme:124:		echo "  set color_normal=${2}"
+/etc/grub.d/05_debian_theme:126:	if [ -n "${3}" ]; then
+/etc/grub.d/05_debian_theme:127:		echo "  set color_highlight=${3}"
+/etc/grub.d/05_debian_theme:129:	if [ -z "${2}" ] && [ -z "${3}" ]; then
+/etc/grub.d/05_debian_theme:138:# during postinst. Remove those obsolete images if they haven't been touched by
+/etc/grub.d/05_debian_theme:139:# the user. They are still available under /usr/share/images/desktop-base/ if
+/etc/grub.d/05_debian_theme:140:# desktop-base is installed.
+/etc/grub.d/05_debian_theme:142:	if [ -f "${background}" ] && [ "x`sha1sum "${background}"`" = "x${checksum}  ${background}" ]; then
+/etc/grub.d/05_debian_theme:143:		echo "Removing old background image: ${background}" >&2
+/etc/grub.d/05_debian_theme:144:		rm "${background}"
+/etc/grub.d/05_debian_theme:147:648ee65dd0c157a69b019a5372cbcfea4fc754a5  debian-blueish-wallpaper-640x480.png
+/etc/grub.d/05_debian_theme:148:0431e97a6c661084c59676c4baeeb8c2f602edb8  debian-blueish-wallpaper-640x480.png
+/etc/grub.d/05_debian_theme:149:968ecf6696c5638cfe80e8e70aba239526270864  debian-blueish-wallpaper-640x480.tga
+/etc/grub.d/05_debian_theme:150:11143e8c92a073401de0b0fd42d0c052af4ccd9b  moreblue-orbit-grub.png
+/etc/grub.d/05_debian_theme:151:d00d5e505ab63f2d53fa880bfac447e2d3bb197c  moreblue-orbit-grub.png
+/etc/grub.d/05_debian_theme:152:f5b12c1009ec0a3b029185f6b66cd0d7e5611019  moreblue-orbit-grub.png
+/etc/grub.d/05_debian_theme:155:# Include the configuration of desktop-base if available.
+/etc/grub.d/05_debian_theme:156:if [ -f "/usr/share/desktop-base/grub_background.sh" ]; then
+/etc/grub.d/05_debian_theme:157:	. "/usr/share/desktop-base/grub_background.sh"
+/etc/grub.d/05_debian_theme:160:# First check whether the user has specified a background image explicitly.
+/etc/grub.d/05_debian_theme:161:# If so, try to use it. Don't try the other possibilities in that case
+/etc/grub.d/05_debian_theme:162:# (#608263).
+/etc/grub.d/05_debian_theme:163:if [ -n "${GRUB_BACKGROUND+x}" ]; then
+/etc/grub.d/05_debian_theme:164:	set_background_image "${GRUB_BACKGROUND}" || set_default_theme
+/etc/grub.d/05_debian_theme:168:# Next search for pictures the user put into /boot/grub/ and use the first one.
+/etc/grub.d/05_debian_theme:169:for background in *.jpg *.JPG *.jpeg *.JPEG *.png *.PNG *.tga *.TGA; do
+/etc/grub.d/05_debian_theme:170:	if set_background_image "${background}"; then
+/etc/grub.d/05_debian_theme:175:# Next try to use the background image and colors specified by desktop-base.
+/etc/grub.d/05_debian_theme:176:if set_background_image "${WALLPAPER}" "${COLOR_NORMAL}" "${COLOR_HIGHLIGHT}"; then
+/etc/grub.d/05_debian_theme:180:# If we haven't found a background image yet, use the default from desktop-base.
+/etc/grub.d/05_debian_theme:181:case $GRUB_DISTRIBUTOR in
+/etc/grub.d/05_debian_theme:185:		if set_background_image "/usr/share/images/grub/grub.png"; then
+/etc/grub.d/05_debian_theme:190:		if set_background_image "/usr/share/images/desktop-base/desktop-grub.png"; then
+/etc/grub.d/05_debian_theme:196:# Finally, if all of the above fails, use the default theme.
+/etc/grub.d/10_linux:4:# grub-mkconfig helper script.
+/etc/grub.d/10_linux:5:# Copyright (C) 2006,2007,2008,2009,2010  Free Software Foundation, Inc.
+/etc/grub.d/10_linux:10:# (at your option) any later version.
+/etc/grub.d/10_linux:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/10_linux:15:# GNU General Public License for more details.
+/etc/grub.d/10_linux:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/10_linux:29:. "$pkgdatadir/grub-mkconfig_lib"
+/etc/grub.d/10_linux:32:export TEXTDOMAINDIR="${datarootdir}/locale"
+/etc/grub.d/10_linux:36:if [ "x${GRUB_DISTRIBUTOR}" = "x" ] ; then
+/etc/grub.d/10_linux:39:  case ${GRUB_DISTRIBUTOR} in
+/etc/grub.d/10_linux:41:      OS="${GRUB_DISTRIBUTOR}"
+/etc/grub.d/10_linux:44:      OS="${GRUB_DISTRIBUTOR} GNU/Linux"
+/etc/grub.d/10_linux:47:  CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1|LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
+/etc/grub.d/10_linux:51:# the initrds that Linux uses don't like that.
+/etc/grub.d/10_linux:52:case ${GRUB_DEVICE} in
+/etc/grub.d/10_linux:54:    GRUB_DEVICE=`losetup ${GRUB_DEVICE} | sed -e "s/^[^(]*(\([^)]\+\)).*/\1/"`
+/etc/grub.d/10_linux:55:    # We can't cope with devices loop-mounted from files here.
+/etc/grub.d/10_linux:56:    case ${GRUB_DEVICE} in
+/etc/grub.d/10_linux:64:    : ${GRUB_CMDLINE_LINUX_RECOVERY:=recovery}
+/etc/grub.d/10_linux:66:    : ${GRUB_CMDLINE_LINUX_RECOVERY:=single}
+/etc/grub.d/10_linux:70:# older kernels.
+/etc/grub.d/10_linux:71:: ${GRUB_DISABLE_LINUX_PARTUUID=true}
+/etc/grub.d/10_linux:77:    dmsetup info -c --noheadings -o $2 $1 2>/dev/null
+/etc/grub.d/10_linux:80:# Is $1 a multipath device?
+/etc/grub.d/10_linux:83:    dmuuid="$(get_dm_field_for_dev $1 uuid)"
+/etc/grub.d/10_linux:84:    if [ $? -ne 0 ]; then
+/etc/grub.d/10_linux:87:        # dmsetup then there are not going to be any multipath devices.
+/etc/grub.d/10_linux:90:    # A device mapper "uuid" is always <type>-<uuid>. If <type> is of the form
+/etc/grub.d/10_linux:92:    # look at that instead. A multipath node always has <type> of mpath.
+/etc/grub.d/10_linux:93:    dmtype="${dmuuid%%-*}"
+/etc/grub.d/10_linux:94:    if [ "${dmtype#part}" != "$dmtype" ]; then
+/etc/grub.d/10_linux:95:        dmuuid="${dmuuid#*-}"
+/etc/grub.d/10_linux:96:        dmtype="${dmuuid%%-*}"
+/etc/grub.d/10_linux:98:    if [ "$dmtype" = "mpath" ]; then
+/etc/grub.d/10_linux:105:if test -e "${GRUB_DEVICE}" && is_multipath "${GRUB_DEVICE}"; then
+/etc/grub.d/10_linux:107:    # using root=UUID= exposes the boot process to udev races. In addition
+/etc/grub.d/10_linux:109:    # symlink that depends on the multipath name.
+/etc/grub.d/10_linux:110:    GRUB_DEVICE=/dev/mapper/"$(get_dm_field_for_dev $GRUB_DEVICE name)"
+/etc/grub.d/10_linux:114:# btrfs may reside on multiple devices. We cannot pass them as value of root= parameter
+/etc/grub.d/10_linux:115:# and mounting btrfs requires user space scanning, so force UUID in this case.
+/etc/grub.d/10_linux:116:if ( [ "x${GRUB_DEVICE_UUID}" = "x" ] && [ "x${GRUB_DEVICE_PARTUUID}" = "x" ] ) \
+/etc/grub.d/10_linux:117:    || ( [ "x${GRUB_DISABLE_LINUX_UUID}" = "xtrue" ] \
+/etc/grub.d/10_linux:118:	&& [ "x${GRUB_DISABLE_LINUX_PARTUUID}" = "xtrue" ] ) \
+/etc/grub.d/10_linux:119:    || ( ! test -e "/dev/disk/by-uuid/${GRUB_DEVICE_UUID}" \
+/etc/grub.d/10_linux:120:	&& ! test -e "/dev/disk/by-partuuid/${GRUB_DEVICE_PARTUUID}" ) \
+/etc/grub.d/10_linux:121:    || ( test -e "${GRUB_DEVICE}" && uses_abstraction "${GRUB_DEVICE}" lvm ); then
+/etc/grub.d/10_linux:122:  LINUX_ROOT_DEVICE=${GRUB_DEVICE}
+/etc/grub.d/10_linux:123:elif [ "x${GRUB_DEVICE_UUID}" = "x" ] \
+/etc/grub.d/10_linux:124:    || [ "x${GRUB_DISABLE_LINUX_UUID}" = "xtrue" ]; then
+/etc/grub.d/10_linux:125:  LINUX_ROOT_DEVICE=PARTUUID=${GRUB_DEVICE_PARTUUID}
+/etc/grub.d/10_linux:127:  LINUX_ROOT_DEVICE=UUID=${GRUB_DEVICE_UUID}
+/etc/grub.d/10_linux:130:case x"$GRUB_FS" in
+/etc/grub.d/10_linux:133:	rootsubvol="${rootsubvol#/}"
+/etc/grub.d/10_linux:134:	if [ "x${rootsubvol}" != x ]; then
+/etc/grub.d/10_linux:135:	    GRUB_CMDLINE_LINUX="rootflags=subvol=${rootsubvol} ${GRUB_CMDLINE_LINUX}"
+/etc/grub.d/10_linux:138:	# We have a more specialized ZFS handler, with multiple system in 10_linux_zfs.
+/etc/grub.d/10_linux:139:	if [ -e "`dirname $(readlink -f $0)`/10_linux_zfs" ]; then
+/etc/grub.d/10_linux:142:	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
+/etc/grub.d/10_linux:143:	bootfs="`make_system_path_relative_to_its_root / | sed -e "s,@$,,"`"
+/etc/grub.d/10_linux:144:	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
+/etc/grub.d/10_linux:150:if [ "$ubuntu_recovery" = 1 ]; then
+/etc/grub.d/10_linux:151:    GRUB_CMDLINE_LINUX_RECOVERY="$GRUB_CMDLINE_LINUX_RECOVERY nomodeset"
+/etc/grub.d/10_linux:154:if [ "$vt_handoff" = 1 ]; then
+/etc/grub.d/10_linux:155:  for word in $GRUB_CMDLINE_LINUX_DEFAULT; do
+/etc/grub.d/10_linux:156:    if [ "$word" = splash ]; then
+/etc/grub.d/10_linux:157:      GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT \$vt_handoff"
+/etc/grub.d/10_linux:162:if [ x"$GRUB_FORCE_PARTUUID" != x ]; then
+/etc/grub.d/10_linux:169:   echo "set partuuid=${GRUB_FORCE_PARTUUID}"
+/etc/grub.d/10_linux:174:  os="$1"
+/etc/grub.d/10_linux:175:  version="$2"
+/etc/grub.d/10_linux:176:  type="$3"
+/etc/grub.d/10_linux:177:  args="$4"
+/etc/grub.d/10_linux:179:  if [ -z "$boot_device_id" ]; then
+/etc/grub.d/10_linux:180:      boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+/etc/grub.d/10_linux:182:  if [ x$type != xsimple ] ; then
+/etc/grub.d/10_linux:183:      case $type in
+/etc/grub.d/10_linux:185:	      title="$(gettext_printf "%s, with Linux %s (%s)" "${os}" "${version}" "$(gettext "${GRUB_RECOVERY_TITLE}")")" ;;
+/etc/grub.d/10_linux:187:	      title="$(gettext_printf "%s, with Linux %s" "${os}" "${version}")" ;;
+/etc/grub.d/10_linux:189:      if [ x"$title" = x"$GRUB_ACTUAL_DEFAULT" ] || [ x"Previous Linux versions>$title" = x"$GRUB_ACTUAL_DEFAULT" ]; then
+/etc/grub.d/10_linux:190:	  replacement_title="$(echo "Advanced options for ${OS}" | sed 's,>,>>,g')>$(echo "$title" | sed 's,>,>>,g')"
+/etc/grub.d/10_linux:191:	  quoted="$(echo "$GRUB_ACTUAL_DEFAULT" | grub_quote)"
+/etc/grub.d/10_linux:192:	  title_correction_code="${title_correction_code}if [ \"x\$default\" = '$quoted' ]; then default='$(echo "$replacement_title" | grub_quote)'; fi;"
+/etc/grub.d/10_linux:193:	  grub_warn "$(gettext_printf "Please don't use old title \`%s' for GRUB_DEFAULT, use \`%s' (for versions before 2.00) or \`%s' (for 2.00 or later)" "$GRUB_ACTUAL_DEFAULT" "$replacement_title" "gnulinux-advanced-$boot_device_id>gnulinux-$version-$type-$boot_device_id")"
+/etc/grub.d/10_linux:195:      echo "menuentry '$(echo "$title" | grub_quote)' ${CLASS} \$menuentry_id_option 'gnulinux-$version-$type-$boot_device_id' {" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:197:      echo "menuentry '$(echo "$os" | grub_quote)' ${CLASS} \$menuentry_id_option 'gnulinux-simple-$boot_device_id' {" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:199:  if [ "$quick_boot" = 1 ]; then
+/etc/grub.d/10_linux:200:      echo "	recordfail" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:202:  if [ x$type != xrecovery ] ; then
+/etc/grub.d/10_linux:206:  # Use ELILO's generic "efifb" when it's known to be available.
+/etc/grub.d/10_linux:207:  # FIXME: We need an interface to select vesafb in case efifb can't be used.
+/etc/grub.d/10_linux:208:  if [ "x$GRUB_GFXPAYLOAD_LINUX" = x ]; then
+/etc/grub.d/10_linux:209:      echo "	load_video" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:211:      if [ "x$GRUB_GFXPAYLOAD_LINUX" != xtext ]; then
+/etc/grub.d/10_linux:212:	  echo "	load_video" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:215:  if ([ "$ubuntu_recovery" = 0 ] || [ x$type != xrecovery ]) && \
+/etc/grub.d/10_linux:216:     ([ "x$GRUB_GFXPAYLOAD_LINUX" != x ] || [ "$gfxpayload_dynamic" = 1 ]); then
+/etc/grub.d/10_linux:217:      echo "	gfxmode \$linux_gfx_mode" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:220:  echo "	insmod gzio" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:221:  echo "	if [ x\$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:223:  if [ x$dirname = x/ ]; then
+/etc/grub.d/10_linux:224:    if [ -z "${prepare_root_cache}" ]; then
+/etc/grub.d/10_linux:225:      prepare_root_cache="$(prepare_grub_to_access_device ${GRUB_DEVICE} | grub_add_tab)"
+/etc/grub.d/10_linux:227:    printf '%s\n' "${prepare_root_cache}" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:229:    if [ -z "${prepare_boot_cache}" ]; then
+/etc/grub.d/10_linux:230:      prepare_boot_cache="$(prepare_grub_to_access_device ${GRUB_DEVICE_BOOT} | grub_add_tab)"
+/etc/grub.d/10_linux:232:    printf '%s\n' "${prepare_boot_cache}" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/10_linux:234:  if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
+/etc/grub.d/10_linux:235:    message="$(gettext_printf "Loading Linux %s ..." ${version})"
+/etc/grub.d/10_linux:236:    sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:237:	echo	'$(echo "$message" | grub_quote)'
+/etc/grub.d/10_linux:241:  # if it fails.
+/etc/grub.d/10_linux:242:  # "panic=-1" means "on panic reboot immediately". "panic=0" disables the reboot behavior.
+/etc/grub.d/10_linux:243:  if [ x"$GRUB_FORCE_PARTUUID" != x ]; then
+/etc/grub.d/10_linux:244:      linux_root_device_thisversion="PARTUUID=${GRUB_FORCE_PARTUUID}"
+/etc/grub.d/10_linux:246:  message="$(gettext_printf "Loading initial ramdisk ...")"
+/etc/grub.d/10_linux:247:  initrdlessfail_msg="$(gettext_printf "GRUB_FORCE_PARTUUID set, initrdless boot failed. Attempting with initrd.")"
+/etc/grub.d/10_linux:248:  initrdlesstry_msg="$(gettext_printf "GRUB_FORCE_PARTUUID set, attempting initrdless boot.")"
+/etc/grub.d/10_linux:250:  for i in ${initrd}; do
+/etc/grub.d/10_linux:251:      initrd_path="${initrd_path} ${rel_dirname}/${i}"
+/etc/grub.d/10_linux:254:  for i in ${initrd_early}; do
+/etc/grub.d/10_linux:255:      initrd_path_only_early="${initrd_path_only_early} ${rel_dirname}/${i}"
+/etc/grub.d/10_linux:257:  if test -n "${initrd}" && [ x"$GRUB_FORCE_PARTUUID" != x ]; then
+/etc/grub.d/10_linux:258:      sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:259:	if [ "\${initrdfail}" = 1 ]; then
+/etc/grub.d/10_linux:260:		echo	'$(echo "$initrdlessfail_msg" | grub_quote)'
+/etc/grub.d/10_linux:261:		linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+/etc/grub.d/10_linux:263:      if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
+/etc/grub.d/10_linux:264:        sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:265:		echo	'$(echo "$message" | grub_quote)'
+/etc/grub.d/10_linux:268:      sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:269:		initrd	$(echo $initrd_path)
+/etc/grub.d/10_linux:271:		echo	'$(echo "$initrdlesstry_msg" | grub_quote)'
+/etc/grub.d/10_linux:272:		linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args} panic=-1
+/etc/grub.d/10_linux:274:      if [ -n "$initrd_path_only_early" ]; then
+/etc/grub.d/10_linux:275:        sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:276:	initrd	$(echo $initrd_path_only_early)
+/etc/grub.d/10_linux:279:      sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:284:  # We don't have initrd or we don't want to set PARTUUID. Don't try initrd-less boot with fallback.
+/etc/grub.d/10_linux:285:      sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:286:	linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+/etc/grub.d/10_linux:288:      if test -n "${initrd}"; then
+/etc/grub.d/10_linux:289:          # We do have initrd - let's use it at boot.
+/etc/grub.d/10_linux:290:          # TRANSLATORS: ramdisk isn't identifier. Should be translated.
+/etc/grub.d/10_linux:291:          if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
+/etc/grub.d/10_linux:292:            sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:293:	echo	'$(echo "$message" | grub_quote)'
+/etc/grub.d/10_linux:296:          sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:297:	initrd	$(echo $initrd_path)
+/etc/grub.d/10_linux:300:    if test -n "${dtb}" ; then
+/etc/grub.d/10_linux:301:      if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
+/etc/grub.d/10_linux:302:        message="$(gettext_printf "Loading device tree blob...")"
+/etc/grub.d/10_linux:303:        sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:304:	echo	'$(echo "$message" | grub_quote)'
+/etc/grub.d/10_linux:307:      sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:308:	devicetree	${rel_dirname}/${dtb}
+/etc/grub.d/10_linux:312:  sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/10_linux:318:case "x$machine" in
+/etc/grub.d/10_linux:322:	    if grub_file_is_not_garbage "$i" ; then list="$list $i" ; fi
+/etc/grub.d/10_linux:327:                  if grub_file_is_not_garbage "$i" ; then list="$list $i" ; fi
+/etc/grub.d/10_linux:331:case "$machine" in
+/etc/grub.d/10_linux:336:    *) GENKERNEL_ARCH="$machine" ;;
+/etc/grub.d/10_linux:339:case "$GENKERNEL_ARCH" in
+/etc/grub.d/10_linux:340:  x86*) GRUB_CMDLINE_LINUX_RECOVERY="$GRUB_CMDLINE_LINUX_RECOVERY dis_ucode_ldr";;
+/etc/grub.d/10_linux:350:	set gfxpayload="${1}"
+/etc/grub.d/10_linux:352:if [ "$vt_handoff" = 1 ]; then
+/etc/grub.d/10_linux:354:	if [ "${1}" = "keep" ]; then
+/etc/grub.d/10_linux:355:		set vt_handoff=vt.handoff=7
+/etc/grub.d/10_linux:365:# Use ELILO's generic "efifb" when it's known to be available.
+/etc/grub.d/10_linux:366:# FIXME: We need an interface to select vesafb in case efifb can't be used.
+/etc/grub.d/10_linux:367:if [ "x$GRUB_GFXPAYLOAD_LINUX" != x ] || [ "$gfxpayload_dynamic" = 0 ]; then
+/etc/grub.d/10_linux:368:  echo "set linux_gfx_mode=$GRUB_GFXPAYLOAD_LINUX"
+/etc/grub.d/10_linux:371:if [ "\${recordfail}" != 1 ]; then
+/etc/grub.d/10_linux:372:  if [ -e \${prefix}/gfxblacklist.txt ]; then
+/etc/grub.d/10_linux:373:    if [ \${grub_platform} != pc ]; then
+/etc/grub.d/10_linux:375:    elif hwmatch \${prefix}/gfxblacklist.txt 3; then
+/etc/grub.d/10_linux:376:      if [ \${match} = 0 ]; then
+/etc/grub.d/10_linux:396:# Extra indentation to add to menu entries in a submenu. We're not in a submenu
+/etc/grub.d/10_linux:397:# yet, so it's empty. In a submenu it will be equal to '\t' (one tab).
+/etc/grub.d/10_linux:400:# Perform a reverse version sort on the entire list.
+/etc/grub.d/10_linux:401:# Temporarily replace the '.old' suffix by ' 1' and append ' 2' for all
+/etc/grub.d/10_linux:402:# other files to order the '.old' files after their non-old counterpart
+/etc/grub.d/10_linux:403:# in reverse-sorted order.
+/etc/grub.d/10_linux:405:reverse_sorted_list=$(echo $list | tr ' ' '\n' | sed -e 's/\.old$/ 1/; / 1$/! s/$/ 2/' | version_sort -r | sed -e 's/ 1$/.old/; s/ 2$//')
+/etc/grub.d/10_linux:407:if [ "x$GRUB_TOP_LEVEL" != x ]; then
+/etc/grub.d/10_linux:408:  reverse_sorted_list=$(grub_move_to_front "$GRUB_TOP_LEVEL" ${reverse_sorted_list})
+/etc/grub.d/10_linux:412:for linux in ${reverse_sorted_list}; do
+/etc/grub.d/10_linux:413:  gettext_printf "Found linux image: %s\n" "$linux" >&2
+/etc/grub.d/10_linux:414:  basename=`basename $linux`
+/etc/grub.d/10_linux:415:  dirname=`dirname $linux`
+/etc/grub.d/10_linux:416:  rel_dirname=`make_system_path_relative_to_its_root $dirname`
+/etc/grub.d/10_linux:417:  version=`echo $basename | sed -e "s,^[^0-9]*-,,g"`
+/etc/grub.d/10_linux:418:  alt_version=`echo $version | sed -e "s,\.old$,,g"`
+/etc/grub.d/10_linux:419:  linux_root_device_thisversion="${LINUX_ROOT_DEVICE}"
+/etc/grub.d/10_linux:422:  for i in ${GRUB_EARLY_INITRD_LINUX_STOCK} \
+/etc/grub.d/10_linux:423:	   ${GRUB_EARLY_INITRD_LINUX_CUSTOM}; do
+/etc/grub.d/10_linux:424:    if test -e "${dirname}/${i}" ; then
+/etc/grub.d/10_linux:425:      initrd_early="${initrd_early} ${i}"
+/etc/grub.d/10_linux:430:  for i in "initrd.img-${version}" "initrd-${version}.img" \
+/etc/grub.d/10_linux:431:	   "initrd-${alt_version}.img.old" "initrd-${version}.gz" \
+/etc/grub.d/10_linux:432:	   "initrd-${alt_version}.gz.old" "initrd-${version}" \
+/etc/grub.d/10_linux:433:	   "initramfs-${version}.img" "initramfs-${alt_version}.img.old" \
+/etc/grub.d/10_linux:434:	   "initrd.img-${alt_version}" "initrd-${alt_version}.img" \
+/etc/grub.d/10_linux:435:	   "initrd-${alt_version}" "initramfs-${alt_version}.img" \
+/etc/grub.d/10_linux:436:	   "initramfs-genkernel-${version}" \
+/etc/grub.d/10_linux:437:	   "initramfs-genkernel-${alt_version}" \
+/etc/grub.d/10_linux:438:	   "initramfs-genkernel-${GENKERNEL_ARCH}-${version}" \
+/etc/grub.d/10_linux:439:	   "initramfs-genkernel-${GENKERNEL_ARCH}-${alt_version}"; do
+/etc/grub.d/10_linux:440:    if test -e "${dirname}/${i}" ; then
+/etc/grub.d/10_linux:441:      initrd_real="${i}"
+/etc/grub.d/10_linux:447:  if test -n "${initrd_early}" || test -n "${initrd_real}"; then
+/etc/grub.d/10_linux:448:    initrd="${initrd_early} ${initrd_real}"
+/etc/grub.d/10_linux:451:    for i in ${initrd}; do
+/etc/grub.d/10_linux:452:      initrd_display="${initrd_display} ${dirname}/${i}"
+/etc/grub.d/10_linux:454:    gettext_printf "Found initrd image: %s\n" "$(echo $initrd_display)" >&2
+/etc/grub.d/10_linux:458:  for i in "dtb-${version}" "dtb-${alt_version}" "dtb"; do
+/etc/grub.d/10_linux:459:    if test -e "${dirname}/${i}" ; then
+/etc/grub.d/10_linux:460:      dtb="$i"
+/etc/grub.d/10_linux:466:  for i in "${dirname}/config-${version}" "${dirname}/config-${alt_version}" "/etc/kernels/kernel-config-${version}" ; do
+/etc/grub.d/10_linux:467:    if test -e "${i}" ; then
+/etc/grub.d/10_linux:468:      config="${i}"
+/etc/grub.d/10_linux:474:  if test -n "${config}" ; then
+/etc/grub.d/10_linux:475:      initramfs=`grep CONFIG_INITRAMFS_SOURCE= "${config}" | cut -f2 -d= | tr -d \"`
+/etc/grub.d/10_linux:478:  if test -z "${initramfs}" && test -z "${initrd_real}" ; then
+/etc/grub.d/10_linux:479:    # "UUID=" and "ZFS=" magic is parsed by initrd or initramfs.  Since there's
+/etc/grub.d/10_linux:480:    # no initrd or builtin initramfs, it can't work here.
+/etc/grub.d/10_linux:481:    if [ "x${GRUB_DEVICE_PARTUUID}" = "x" ] \
+/etc/grub.d/10_linux:482:	|| [ "x${GRUB_DISABLE_LINUX_PARTUUID}" = "xtrue" ]; then
+/etc/grub.d/10_linux:484:	linux_root_device_thisversion=${GRUB_DEVICE}
+/etc/grub.d/10_linux:486:	linux_root_device_thisversion=PARTUUID=${GRUB_DEVICE_PARTUUID}
+/etc/grub.d/10_linux:492:  # enable it. This caused a lot of confusion to users that set the option to 'y',
+/etc/grub.d/10_linux:493:  # 'yes' or 'true'. This was fixed but all of these values must be supported now.
+/etc/grub.d/10_linux:494:  if [ "x${GRUB_DISABLE_SUBMENU}" = xyes ] || [ "x${GRUB_DISABLE_SUBMENU}" = xy ]; then
+/etc/grub.d/10_linux:498:  if [ "x$is_top_level" = xtrue ] && [ "x${GRUB_DISABLE_SUBMENU}" != xtrue ]; then
+/etc/grub.d/10_linux:499:    linux_entry "${OS}" "${version}" simple \
+/etc/grub.d/10_linux:500:    "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+/etc/grub.d/10_linux:502:    submenu_indentation="$grub_tab"
+/etc/grub.d/10_linux:504:    if [ -z "$boot_device_id" ]; then
+/etc/grub.d/10_linux:505:	boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+/etc/grub.d/10_linux:508:    echo "submenu '$(gettext_printf "Advanced options for %s" "${OS}" | grub_quote)' \$menuentry_id_option 'gnulinux-advanced-$boot_device_id' {"
+/etc/grub.d/10_linux:512:  linux_entry "${OS}" "${version}" advanced \
+/etc/grub.d/10_linux:513:              "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+/etc/grub.d/10_linux:514:  if [ "x${GRUB_DISABLE_RECOVERY}" != "xtrue" ]; then
+/etc/grub.d/10_linux:515:    linux_entry "${OS}" "${version}" recovery \
+/etc/grub.d/10_linux:516:                "${GRUB_CMDLINE_LINUX_RECOVERY} ${GRUB_CMDLINE_LINUX}"
+/etc/grub.d/10_linux:521:# add a closing '}' for the submenu command.
+/etc/grub.d/10_linux:522:if [ x"$is_top_level" != xtrue ]; then
+/etc/grub.d/10_linux:526:echo "$title_correction_code"
+/etc/grub.d/10_linux_zfs:4:# grub-mkconfig helper script.
+/etc/grub.d/10_linux_zfs:5:# Copyright (C) 2019 Canonical Ltd.
+/etc/grub.d/10_linux_zfs:10:# (at your option) any later version.
+/etc/grub.d/10_linux_zfs:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/10_linux_zfs:15:# GNU General Public License for more details.
+/etc/grub.d/10_linux_zfs:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/10_linux_zfs:28:. "${pkgdatadir}/grub-mkconfig_lib"
+/etc/grub.d/10_linux_zfs:31:export TEXTDOMAINDIR="${datarootdir}/locale"
+/etc/grub.d/10_linux_zfs:39:MNTDIR="$(mktemp -d ${TMPDIR:-/tmp}/zfsmnt.XXXXXX)"
+/etc/grub.d/10_linux_zfs:40:ZFSTMP="$(mktemp -d ${TMPDIR:-/tmp}/zfstmp.XXXXXX)"
+/etc/grub.d/10_linux_zfs:43:machine="$(uname -m)"
+/etc/grub.d/10_linux_zfs:44:case "${machine}" in
+/etc/grub.d/10_linux_zfs:49:    *) GENKERNEL_ARCH="${machine}" ;;
+/etc/grub.d/10_linux_zfs:55:    for pool in ${imported_pools}; do
+/etc/grub.d/10_linux_zfs:56:        zpool export "${pool}"
+/etc/grub.d/10_linux_zfs:59:    mountpoint -q "${MNTDIR}/boot"  && umount "${MNTDIR}/boot" || true
+/etc/grub.d/10_linux_zfs:60:    mountpoint -q "${MNTDIR}"  && umount "${MNTDIR}" || true
+/etc/grub.d/10_linux_zfs:61:    rmdir "${MNTDIR}"
+/etc/grub.d/10_linux_zfs:62:    rm -rf "${ZFSTMP}"
+/etc/grub.d/10_linux_zfs:63:    exit "${RC}"
+/etc/grub.d/10_linux_zfs:70:    # and we need to autodetect all zpools this way with their real mountpoints.
+/etc/grub.d/10_linux_zfs:71:    local initial_pools="$(zpool list | awk '{if (NR>1) print $1}')"
+/etc/grub.d/10_linux_zfs:77:    err="$(zpool import -f -a -o cachefile=none -o readonly=on -N 2>&1)"
+/etc/grub.d/10_linux_zfs:80:    if [ $? -ne 0 ]; then
+/etc/grub.d/10_linux_zfs:81:        echo "Some pools couldn't be imported and will be ignored:\n${err}" >&2
+/etc/grub.d/10_linux_zfs:85:    all_pools="$(zpool list | awk '{if (NR>1) print $1}')"
+/etc/grub.d/10_linux_zfs:86:    for pool in ${all_pools}; do
+/etc/grub.d/10_linux_zfs:87:        if echo "${initial_pools}" | grep -wq "${pool}"; then
+/etc/grub.d/10_linux_zfs:90:        imported_pools="${imported_pools} ${pool}"
+/etc/grub.d/10_linux_zfs:93:    echo "${imported_pools}"
+/etc/grub.d/10_linux_zfs:98:    local pools="$(zpool list | awk '{if (NR>1) print $1}')"
+/etc/grub.d/10_linux_zfs:100:    for p in ${pools}; do
+/etc/grub.d/10_linux_zfs:101:        local rel_pool_root=$(zpool get -H altroot ${p} | awk '{print $3}')
+/etc/grub.d/10_linux_zfs:102:        if [ "${rel_pool_root}" = "-" ]; then
+/etc/grub.d/10_linux_zfs:106:        zfs list -H -o name,canmount,mountpoint -t filesystem | grep -E '^'"${p}"'(\s|/[[:print:]]*\s)(on|noauto)\s'"${rel_pool_root}"'$' | awk '{print $1}'
+/etc/grub.d/10_linux_zfs:111:# $1 is our current dataset name
+/etc/grub.d/10_linux_zfs:112:# $2 directory path we look for (cannot contains /)
+/etc/grub.d/10_linux_zfs:113:# $3 is the temporary mount directory to use
+/etc/grub.d/10_linux_zfs:114:# $4 is the optional snapshot name
+/etc/grub.d/10_linux_zfs:117:    local dataset="$1"
+/etc/grub.d/10_linux_zfs:118:    local directory="$2"
+/etc/grub.d/10_linux_zfs:119:    local mntdir="$3"
+/etc/grub.d/10_linux_zfs:120:    local snapshot_name="$4"
+/etc/grub.d/10_linux_zfs:122:    local mount_path="${mntdir}/${directory}"
+/etc/grub.d/10_linux_zfs:124:    if ! zfs list "${dataset}" >/dev/null 2>&1; then
+/etc/grub.d/10_linux_zfs:128:    if ! mount -o noatime,zfsutil -t zfs "${dataset}" "${mount_path}"; then
+/etc/grub.d/10_linux_zfs:129:        grub_warn "Failed to find a valid directory '${directory}' for dataset '${dataset}@${snapshot_name}'. Ignoring"
+/etc/grub.d/10_linux_zfs:133:    local candidate_path="${mount_path}"
+/etc/grub.d/10_linux_zfs:134:    if [ -n "${snapshot_name}" ]; then
+/etc/grub.d/10_linux_zfs:135:        # WORKAROUND a bug https://github.com/zfsonlinux/zfs/issues/9958
+/etc/grub.d/10_linux_zfs:138:        first_mntdir=$(awk '{if ($1 == "'${dataset}'") {print $2; exit;}}' /proc/mounts)
+/etc/grub.d/10_linux_zfs:139:        if [ "${first_mntdir}" = "/" ]; then
+/etc/grub.d/10_linux_zfs:143:        candidate_path="${first_mntdir}/.zfs/snapshot/${snapshot_name}"
+/etc/grub.d/10_linux_zfs:146:    if [ -n "$(ls "${candidate_path}" 2>/dev/null)" ]; then
+/etc/grub.d/10_linux_zfs:147:        echo "${candidate_path}"
+/etc/grub.d/10_linux_zfs:150:        mountpoint -q "${mount_path}" && umount "${mount_path}" || true
+/etc/grub.d/10_linux_zfs:156:# We can fallback trying other zfs pools if no match has been found.
+/etc/grub.d/10_linux_zfs:157:# $1 is our current dataset name (which can have @snapshot name)
+/etc/grub.d/10_linux_zfs:158:# $2 directory path we look for (cannot contains /)
+/etc/grub.d/10_linux_zfs:159:# $3 restrict_to_same_pool (true|false) force looking for dataset with the same basename in the current dataset pool only
+/etc/grub.d/10_linux_zfs:160:# $4 is the temporary mount directory to use
+/etc/grub.d/10_linux_zfs:161:# $5 is the optional etc directory (if not $2 is not etc itself)
+/etc/grub.d/10_linux_zfs:164:    local dataset_path="$1"
+/etc/grub.d/10_linux_zfs:165:    local directory="$2"
+/etc/grub.d/10_linux_zfs:166:    local restrict_to_same_pool="$3"
+/etc/grub.d/10_linux_zfs:167:    local mntdir="$4"
+/etc/grub.d/10_linux_zfs:168:    local etc_dir="$5"
+/etc/grub.d/10_linux_zfs:170:    if [ -z "${etc_dir}" ]; then
+/etc/grub.d/10_linux_zfs:171:        etc_dir="${mntdir}/etc"
+/etc/grub.d/10_linux_zfs:174:    local candidate_path="${mntdir}/${directory}"
+/etc/grub.d/10_linux_zfs:176:    # 1. Look for /etc/fstab first (which will mount even on top of non empty $directory)
+/etc/grub.d/10_linux_zfs:178:    if [ -f "${etc_dir}/fstab" ]; then
+/etc/grub.d/10_linux_zfs:179:        mount_args=$(awk '/^[^#].*[ \t]\/'"${directory}"'[ \t]/ {print "-t", $3, $1}' "${etc_dir}/fstab")
+/etc/grub.d/10_linux_zfs:180:        if [ -n "${mount_args}" ]; then
+/etc/grub.d/10_linux_zfs:182:            mount -o noatime ${mount_args} "${candidate_path}" || mounted_fstab_entry="false"
+/etc/grub.d/10_linux_zfs:186:    # If directory isn't empty. Only count if coming from /etc/fstab. Will be
+/etc/grub.d/10_linux_zfs:187:    # handled below otherwise as we are interested in potential snapshots.
+/etc/grub.d/10_linux_zfs:188:    if [ "${mounted_fstab_entry}" = "true" -a -n "$(ls ${candidate_path} 2>/dev/null)" ]; then
+/etc/grub.d/10_linux_zfs:189:        echo "${candidate_path}"
+/etc/grub.d/10_linux_zfs:193:    # 2. Handle zfs case, which can be a snapshots.
+/etc/grub.d/10_linux_zfs:195:    local base_dataset_path="${dataset_path}"
+/etc/grub.d/10_linux_zfs:198:    if echo "${dataset_path}" | grep -q '@'; then
+/etc/grub.d/10_linux_zfs:199:        base_dataset_path=$(echo "${dataset_path}" | cut -d '@' -f1)
+/etc/grub.d/10_linux_zfs:200:        snapshot_name=$(echo "${dataset_path}" | cut -d '@' -f2)
+/etc/grub.d/10_linux_zfs:202:    base_dataset_name="${base_dataset_path##*/}"
+/etc/grub.d/10_linux_zfs:203:    base_pool="$(echo "${base_dataset_path}" | cut -d'/' -f1)"
+/etc/grub.d/10_linux_zfs:205:    # 2.a) Look for child dataset included in base dataset, which needs to hold same snapshot if any
+/etc/grub.d/10_linux_zfs:206:    candidate_path=$(validate_system_dataset "${base_dataset_path}/${directory}" "${directory}" "${mntdir}" "${snapshot_name}")
+/etc/grub.d/10_linux_zfs:207:    if [ -n "${candidate_path}" ]; then
+/etc/grub.d/10_linux_zfs:208:        echo "${candidate_path}"
+/etc/grub.d/10_linux_zfs:212:    # 2.b) Look for current dataset (which is already mounted as /)
+/etc/grub.d/10_linux_zfs:213:    candidate_path="${mntdir}/${directory}"
+/etc/grub.d/10_linux_zfs:214:    if [ -n "${snapshot_name}" ]; then
+/etc/grub.d/10_linux_zfs:215:        # WORKAROUND a bug https://github.com/zfsonlinux/zfs/issues/9958
+/etc/grub.d/10_linux_zfs:218:        first_mntdir=$(awk '{if ($1 == "'${base_dataset_path}'") {print $2; exit;}}' /proc/mounts)
+/etc/grub.d/10_linux_zfs:219:        if [ "${first_mntdir}" = "/" ]; then
+/etc/grub.d/10_linux_zfs:223:        candidate_path="${first_mntdir}/.zfs/snapshot/${snapshot_name}/${directory}"
+/etc/grub.d/10_linux_zfs:225:    if [ -n "$(ls "${candidate_path}" 2>/dev/null)" ]; then
+/etc/grub.d/10_linux_zfs:226:        echo "${candidate_path}"
+/etc/grub.d/10_linux_zfs:230:    # 2.c) Look for every datasets in every pool which isn't the current dataset which holds:
+/etc/grub.d/10_linux_zfs:234:    all_same_base_dataset_name="$(zfs list -H -t filesystem -o name,canmount | awk '/^[^ ]+\/'"${base_dataset_name}"'[ \t](on|noauto)/ {print $1}') "
+/etc/grub.d/10_linux_zfs:239:    root_pool=$(echo "${dataset_path%%/*}")
+/etc/grub.d/10_linux_zfs:240:    for d in ${all_same_base_dataset_name}; do
+/etc/grub.d/10_linux_zfs:241:        cur_dataset_pool=$(echo "${d%%/*}")
+/etc/grub.d/10_linux_zfs:242:        if echo "${cur_dataset_pool}" | grep -wq "${root_pool}" 2>/dev/null ; then
+/etc/grub.d/10_linux_zfs:243:            current_pool_same_base_datasets="${current_pool_same_base_datasets} ${d}"
+/etc/grub.d/10_linux_zfs:245:            other_pools_same_base_datasets="${other_pools_same_base_datasets} ${d}"
+/etc/grub.d/10_linux_zfs:248:    ordered_same_base_datasets="${current_pool_same_base_datasets} ${other_pools_same_base_datasets}"
+/etc/grub.d/10_linux_zfs:249:    if [ "${restrict_to_same_pool}" = "true" ]; then
+/etc/grub.d/10_linux_zfs:250:        ordered_same_base_datasets="${current_pool_same_base_datasets}"
+/etc/grub.d/10_linux_zfs:254:    for d in ${ordered_same_base_datasets}; do
+/etc/grub.d/10_linux_zfs:255:        cur_dataset_pool=$(echo "${d%%/*}")
+/etc/grub.d/10_linux_zfs:257:        rel_pool_root=$(zpool get -H altroot ${cur_dataset_pool} | awk '{print $3}')
+/etc/grub.d/10_linux_zfs:258:        if [ "${rel_pool_root}" = "-" ]; then
+/etc/grub.d/10_linux_zfs:263:        candidate_dataset=$(zfs get -H mountpoint ${d} | grep -E "mountpoint\s${rel_pool_root}/${directory}\s" | awk '{print $1}')
+/etc/grub.d/10_linux_zfs:264:        if [ -z "${candidate_dataset}" ]; then
+/etc/grub.d/10_linux_zfs:268:        candidate_path=$(validate_system_dataset "${candidate_dataset}" "${directory}" "${mntdir}" "${snapshot_name}")
+/etc/grub.d/10_linux_zfs:269:        if [ -n "${candidate_path}" ]; then
+/etc/grub.d/10_linux_zfs:270:            echo "${candidate_path}"
+/etc/grub.d/10_linux_zfs:275:    # 2.d) If we didn't find anything yet: check for persistent datasets corresponding to our mountpoint, with canmount=on without any snapshot associated:
+/etc/grub.d/10_linux_zfs:276:    # Note: we go over previous datasets as well, but this is ok, as we didn't include them before.
+/etc/grub.d/10_linux_zfs:277:    all_mountable_datasets="$(zfs list -t filesystem -o name,canmount | awk  '/^[^ ]+[ \t]+on/ {print $1}')"
+/etc/grub.d/10_linux_zfs:282:    root_pool=$(echo "${dataset_path%%/*}")
+/etc/grub.d/10_linux_zfs:283:    for d in ${all_mountable_datasets}; do
+/etc/grub.d/10_linux_zfs:284:        cur_dataset_pool=$(echo "${d%%/*}")
+/etc/grub.d/10_linux_zfs:285:        if echo "${cur_dataset_pool}" | grep -wq "${root_pool}" 2>/dev/null ; then
+/etc/grub.d/10_linux_zfs:286:            current_pool_datasets="${current_pool_datasets} ${d}"
+/etc/grub.d/10_linux_zfs:288:            other_pools_datasets="${other_pools_datasets} ${d}"
+/etc/grub.d/10_linux_zfs:291:    ordered_datasets="${current_pool_datasets} ${other_pools_datasets}"
+/etc/grub.d/10_linux_zfs:292:    if [ "${restrict_to_same_pool}" = "true" ]; then
+/etc/grub.d/10_linux_zfs:293:        ordered_datasets="${current_pool_datasets}"
+/etc/grub.d/10_linux_zfs:296:    for d in ${ordered_datasets}; do
+/etc/grub.d/10_linux_zfs:297:        cur_dataset_pool=$(echo "${d%%/*}")
+/etc/grub.d/10_linux_zfs:299:        rel_pool_root=$(zpool get -H altroot ${cur_dataset_pool} | awk '{print $3}')
+/etc/grub.d/10_linux_zfs:300:        if [ "${rel_pool_root}" = "-" ]; then
+/etc/grub.d/10_linux_zfs:305:        candidate_dataset=$(zfs get -H mountpoint ${d} | grep -E "mountpoint\s${rel_pool_root}/${directory}\s" | awk '{print $1}')
+/etc/grub.d/10_linux_zfs:306:        if [ -z "${candidate_dataset}" ]; then
+/etc/grub.d/10_linux_zfs:310:        candidate_path=$(validate_system_dataset "${d}" "${directory}" "${mntdir}" "")
+/etc/grub.d/10_linux_zfs:311:        if [ -n "${candidate_path}" ]; then
+/etc/grub.d/10_linux_zfs:312:            echo "${candidate_path}"
+/etc/grub.d/10_linux_zfs:317:    grub_warn "Failed to find a valid directory '${directory}' for dataset '${dataset_path}'. Ignoring"
+/etc/grub.d/10_linux_zfs:323:# $1 is our current dataset name (which can have @snapshot name)
+/etc/grub.d/10_linux_zfs:324:# $2 is the temporary mount directory to use
+/etc/grub.d/10_linux_zfs:327:    local root_dataset_path="$1"
+/etc/grub.d/10_linux_zfs:328:    local mntdir="$2"
+/etc/grub.d/10_linux_zfs:330:    dataset_basename="${root_dataset_path##*/}"
+/etc/grub.d/10_linux_zfs:331:    candidate_dataset="bpool/BOOT/${dataset_basename}"
+/etc/grub.d/10_linux_zfs:332:    dataset_properties="$(zfs get -H mountpoint,canmount "${candidate_dataset}" 2>/dev/null | cut -f3 | paste -sd ' ')"
+/etc/grub.d/10_linux_zfs:333:    if [ -z "${dataset_properties}" ]; then
+/etc/grub.d/10_linux_zfs:337:    rel_pool_root=$(zpool get -H altroot bpool | awk '{print $3}')
+/etc/grub.d/10_linux_zfs:338:    if [ "${rel_pool_root}" = "-" ]; then
+/etc/grub.d/10_linux_zfs:342:    snapshot_name="${dataset_basename##*@}"
+/etc/grub.d/10_linux_zfs:343:    [ "${snapshot_name}" = "${dataset_basename}" ] && snapshot_name=""
+/etc/grub.d/10_linux_zfs:344:    if [ -z "${snapshot_name}" ]; then
+/etc/grub.d/10_linux_zfs:345:        if ! echo "${dataset_properties}" | grep -Eq "${rel_pool_root}/boot (on|noauto)"; then
+/etc/grub.d/10_linux_zfs:349:        candidate_dataset=$(echo "${candidate_dataset}" | cut -d '@' -f1)
+/etc/grub.d/10_linux_zfs:352:    validate_system_dataset "${candidate_dataset}" "boot" "${mntdir}" "${snapshot_name}"
+/etc/grub.d/10_linux_zfs:366:# $1 is dataset we want information from
+/etc/grub.d/10_linux_zfs:367:# $2 is the temporary mount directory to use
+/etc/grub.d/10_linux_zfs:369:    local dataset="$1"
+/etc/grub.d/10_linux_zfs:370:    local mntdir="$2"
+/etc/grub.d/10_linux_zfs:372:    local base_dataset="${dataset}"
+/etc/grub.d/10_linux_zfs:373:    local etc_dir="${mntdir}/etc"
+/etc/grub.d/10_linux_zfs:376:    if echo "${dataset}" | grep -q '@'; then
+/etc/grub.d/10_linux_zfs:377:        base_dataset=$(echo "${dataset}" | cut -d '@' -f1)
+/etc/grub.d/10_linux_zfs:381:    mount -o noatime,zfsutil -t zfs "${base_dataset}" "${mntdir}"
+/etc/grub.d/10_linux_zfs:384:    etc_dir=$(get_system_directory "${dataset}" "etc" "true" "${mntdir}" "")
+/etc/grub.d/10_linux_zfs:385:    if [ -z  "${etc_dir}" ]; then
+/etc/grub.d/10_linux_zfs:386:        grub_warn "Ignoring ${dataset}"
+/etc/grub.d/10_linux_zfs:387:        mountpoint -q "${mntdir}/etc" && umount "${mntdir}/etc" || true
+/etc/grub.d/10_linux_zfs:388:        umount "${mntdir}"
+/etc/grub.d/10_linux_zfs:393:    if [ -f "${etc_dir}/machine-id" ]; then
+/etc/grub.d/10_linux_zfs:394:        machine_id=$(cat "${etc_dir}/machine-id")
+/etc/grub.d/10_linux_zfs:397:    # (mostly the case of new installations before first boot).
+/etc/grub.d/10_linux_zfs:398:    # Let's use the dataset name directly for this.
+/etc/grub.d/10_linux_zfs:399:    # Consequence is that all datasets are then separated.
+/etc/grub.d/10_linux_zfs:400:    if [ -z "${machine_id}" ]; then
+/etc/grub.d/10_linux_zfs:401:        machine_id="${dataset}"
+/etc/grub.d/10_linux_zfs:403:    pretty_name=$(. "${etc_dir}/os-release" && echo "${PRETTY_NAME}")
+/etc/grub.d/10_linux_zfs:404:    mountpoint -q "${mntdir}/etc" && umount "${mntdir}/etc" || true
+/etc/grub.d/10_linux_zfs:407:    boot_dir="$(try_default_layout_bpool "${dataset}" "${mntdir}")"
+/etc/grub.d/10_linux_zfs:408:    if [ -z "${boot_dir}" ]; then
+/etc/grub.d/10_linux_zfs:409:        boot_dir=$(get_system_directory "${dataset}" "boot" "false" "${mntdir}" "${etc_dir}")
+/etc/grub.d/10_linux_zfs:412:    if [ -z  "${boot_dir}" ]; then
+/etc/grub.d/10_linux_zfs:413:        grub_warn "Ignoring ${dataset}"
+/etc/grub.d/10_linux_zfs:414:        mountpoint -q "${mntdir}/boot" && umount "${mntdir}/boot" || true
+/etc/grub.d/10_linux_zfs:415:        umount "${mntdir}"
+/etc/grub.d/10_linux_zfs:421:    candidate_kernel_list="$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')"
+/etc/grub.d/10_linux_zfs:423:    # Perform a reverse version sort on the entire list.
+/etc/grub.d/10_linux_zfs:424:    # Temporarily replace the '.old' suffix by ' 1' and append ' 2' for all
+/etc/grub.d/10_linux_zfs:425:    # other files to order the '.old' files after their non-old counterpart
+/etc/grub.d/10_linux_zfs:426:    # in reverse-sorted order.
+/etc/grub.d/10_linux_zfs:428:    reverse_sorted_list=$(echo $candidate_kernel_list | tr ' ' '\n' | sed -e 's/\.old$/ 1/; / 1$/! s/$/ 2/' | version_sort -r | sed -e 's/ 1$/.old/; s/ 2$//')
+/etc/grub.d/10_linux_zfs:430:    for linux in ${reverse_sorted_list}; do
+/etc/grub.d/10_linux_zfs:431:        if ! grub_file_is_not_garbage "${linux}" ; then
+/etc/grub.d/10_linux_zfs:435:        # Filters entry if efi/non efi.
+/etc/grub.d/10_linux_zfs:436:        # Note that for now we allow kernel without .efi.signed as those are signed kernel
+/etc/grub.d/10_linux_zfs:437:        # on ubuntu, loaded by the shim.
+/etc/grub.d/10_linux_zfs:438:        case "${linux}" in
+/etc/grub.d/10_linux_zfs:439:            *.efi.signed)
+/etc/grub.d/10_linux_zfs:440:                if [ "$(is_secure_boot_enabled)" = "false" ]; then
+/etc/grub.d/10_linux_zfs:446:        linux_basename=$(basename "${linux}")
+/etc/grub.d/10_linux_zfs:447:        linux_dirname=$(dirname "${linux}")
+/etc/grub.d/10_linux_zfs:448:        version=$(echo "${linux_basename}" | sed -e "s,^[^0-9]*-,,g")
+/etc/grub.d/10_linux_zfs:449:        alt_version=$(echo "${version}" | sed -e "s,\.old$,,g")
+/etc/grub.d/10_linux_zfs:451:        gettext_printf "Found linux image: %s in %s\n" "${linux_basename}" "${dataset}" >&2
+/etc/grub.d/10_linux_zfs:454:        for i in "initrd.img-${version}" "initrd-${version}.img" "initrd-${version}.gz" \
+/etc/grub.d/10_linux_zfs:455:            "initrd-${version}" "initramfs-${version}.img" \
+/etc/grub.d/10_linux_zfs:456:            "initrd.img-${alt_version}" "initrd-${alt_version}.img" \
+/etc/grub.d/10_linux_zfs:457:            "initrd-${alt_version}" "initramfs-${alt_version}.img" \
+/etc/grub.d/10_linux_zfs:458:            "initramfs-genkernel-${version}" \
+/etc/grub.d/10_linux_zfs:459:            "initramfs-genkernel-${alt_version}" \
+/etc/grub.d/10_linux_zfs:460:            "initramfs-genkernel-${GENKERNEL_ARCH}-${version}" \
+/etc/grub.d/10_linux_zfs:461:            "initramfs-genkernel-${GENKERNEL_ARCH}-${alt_version}"; do
+/etc/grub.d/10_linux_zfs:462:            if test -e "${linux_dirname}/${i}" ; then
+/etc/grub.d/10_linux_zfs:463:                initrd="$i"
+/etc/grub.d/10_linux_zfs:468:        if test -z "${initrd}" ; then
+/etc/grub.d/10_linux_zfs:469:            grub_warn "Couldn't find any valid initrd for dataset ${dataset}."
+/etc/grub.d/10_linux_zfs:473:        gettext_printf "Found initrd image: %s in %s\n" "${initrd}" "${dataset}" >&2
+/etc/grub.d/10_linux_zfs:475:        rel_linux_dirname=$(make_system_path_relative_to_its_root "${linux_dirname}")
+/etc/grub.d/10_linux_zfs:477:        initrd_list="${initrd_list}|${rel_linux_dirname}/${initrd}"
+/etc/grub.d/10_linux_zfs:478:        kernel_list="${kernel_list}|${rel_linux_dirname}/${linux_basename}"
+/etc/grub.d/10_linux_zfs:481:    initrd_list="${initrd_list#|}"
+/etc/grub.d/10_linux_zfs:482:    kernel_list="${kernel_list#|}"
+/etc/grub.d/10_linux_zfs:484:    initrd_device=$(${grub_probe} --target=device "${boot_dir}" | head -1)
+/etc/grub.d/10_linux_zfs:486:    mountpoint -q "${mntdir}/boot" && umount "${mntdir}/boot" || true
+/etc/grub.d/10_linux_zfs:488:    case "${boot_dir}" in /boot/.zfs/snapshot/*)
+/etc/grub.d/10_linux_zfs:489:        umount "${boot_dir}" || true
+/etc/grub.d/10_linux_zfs:494:    last_booted_kernel=$(zfs get -H com.ubuntu.zsys:last-booted-kernel "${dataset}" | awk -v FS='\t' '{print $3}')
+/etc/grub.d/10_linux_zfs:497:    if [ "${is_snapshot}" = "true" ]; then
+/etc/grub.d/10_linux_zfs:498:        last_used="$(zfs get -pH creation "${dataset}" | awk -F '\t' '{print $3}')"
+/etc/grub.d/10_linux_zfs:502:        if zfs mount | awk '/[ \t]+\/$/ {print $1}' | grep -q "${dataset}"; then
+/etc/grub.d/10_linux_zfs:503:            last_used=$(date +%s)
+/etc/grub.d/10_linux_zfs:505:            last_used=$(zfs get -H com.ubuntu.zsys:last-used "${dataset}" | awk '{print $3}')
+/etc/grub.d/10_linux_zfs:506:            # case of non zsys, or zsys without annotation, take /etc/machine-id stat (as we mounted with noatime).
+/etc/grub.d/10_linux_zfs:508:            # within the same d).
+/etc/grub.d/10_linux_zfs:509:            if [ "${last_used}" = "-" ]; then
+/etc/grub.d/10_linux_zfs:510:                last_used=$(stat --printf="%X" "${mntdir}/etc/os-release")
+/etc/grub.d/10_linux_zfs:511:                if [ -f "${mntdir}/etc/machine-id" ]; then
+/etc/grub.d/10_linux_zfs:512:                    last_used=$(stat --printf="%X" "${mntdir}/etc/machine-id")
+/etc/grub.d/10_linux_zfs:518:    is_zsys=$(zfs get -H com.ubuntu.zsys:bootfs "${base_dataset}" | awk '{print $3}')
+/etc/grub.d/10_linux_zfs:520:    if [ -n "${initrd_list}" -a -n "${kernel_list}" ]; then
+/etc/grub.d/10_linux_zfs:521:        echo "${dataset}\t${is_zsys}\t${machine_id}\t${pretty_name}\t${last_used}\t${initrd_device}\t${initrd_list}\t${kernel_list}\t${last_booted_kernel}"
+/etc/grub.d/10_linux_zfs:523:        grub_warn "didn't find any valid initrd or kernel."
+/etc/grub.d/10_linux_zfs:526:    umount "${mntdir}" || true
+/etc/grub.d/10_linux_zfs:528:    # This process only needs to run if the snapshot contains an .../etc path,
+/etc/grub.d/10_linux_zfs:529:    #  otherwise the build process may silently fail and produce no kernel lines in grub.cfg
+/etc/grub.d/10_linux_zfs:530:    if [ -e "${etc_dir}" ]; then
+/etc/grub.d/10_linux_zfs:531:        case "${etc_dir}" in /.zfs/snapshot/*/etc)
+/etc/grub.d/10_linux_zfs:532:            snapshot_path="$(findmnt -n -o TARGET -T "${etc_dir}")"
+/etc/grub.d/10_linux_zfs:533:            umount "${snapshot_path}" || true
+/etc/grub.d/10_linux_zfs:540:# $1 is the temporary mount directory to use
+/etc/grub.d/10_linux_zfs:542:    local mntdir="$1"
+/etc/grub.d/10_linux_zfs:545:    for dataset in $(get_root_datasets); do
+/etc/grub.d/10_linux_zfs:547:        boot_list="${boot_list}$(get_dataset_info "${dataset}" ${mntdir})\n"
+/etc/grub.d/10_linux_zfs:550:        snapshots="$(zfs list -H -o name -t snapshot "${dataset}"|while read snapshot_dataset; do
+/etc/grub.d/10_linux_zfs:551:            get_dataset_info "${snapshot_dataset}" ${mntdir}
+/etc/grub.d/10_linux_zfs:553:        [ -n "${snapshots}" ] && boot_list="${boot_list}${snapshots}\n"
+/etc/grub.d/10_linux_zfs:555:    echo "${boot_list}"
+/etc/grub.d/10_linux_zfs:561:    local bootlist="$1"
+/etc/grub.d/10_linux_zfs:563:    local machineids="$(echo "${bootlist}" | awk '{print $3}' | sort -u)"
+/etc/grub.d/10_linux_zfs:564:    for machineid in ${machineids}; do
+/etc/grub.d/10_linux_zfs:565:        echo "${bootlist}" | awk 'BEGIN{FS="\t"} $1 !~ /.*@.*/  {print $5, $3}' | sort -nr | grep -E "[^^]\b${machineid}\b" | head -1
+/etc/grub.d/10_linux_zfs:566:    done | sort -nr | awk '{print $2}'
+/etc/grub.d/10_linux_zfs:571:    local bootlist="$1"
+/etc/grub.d/10_linux_zfs:572:    local machineid="$2"
+/etc/grub.d/10_linux_zfs:574:    tab="$(printf '\t')"
+/etc/grub.d/10_linux_zfs:575:    echo "${bootlist}" | grep -E "[^^]\b${machineid}\b" | sort -k5,5r -k1,1 -t "${tab}"
+/etc/grub.d/10_linux_zfs:580:    local entries="$1"
+/etc/grub.d/10_linux_zfs:582:    echo "${entries}" | awk 'BEGIN{FS="\t"} $1 !~ /.*@.*/  {print}' | head -1
+/etc/grub.d/10_linux_zfs:587:    local entry="$1"
+/etc/grub.d/10_linux_zfs:588:    local index="$2"
+/etc/grub.d/10_linux_zfs:590:    echo "${entry}" | awk "BEGIN{FS=\"\t\"} {print \$$index}"
+/etc/grub.d/10_linux_zfs:595:    local main_entry="$1"
+/etc/grub.d/10_linux_zfs:597:    initrd=$(get_field_from_entry "${main_entry}" 7 | cut -d'|' -f1)
+/etc/grub.d/10_linux_zfs:598:    kernel=$(get_field_from_entry "${main_entry}" 8 | cut -d'|' -f1)
+/etc/grub.d/10_linux_zfs:601:    echo "${main_entry}" | awk "BEGIN{ FS=\"\t\"; OFS=\"\t\"} {print \$3, \$2, \"main\", \$4, \$1, \$6, \"$initrd\", \"$kernel\"}"
+/etc/grub.d/10_linux_zfs:606:    local main_entry="$1"
+/etc/grub.d/10_linux_zfs:608:    last_used_kernel="$(get_field_from_entry "${main_entry}" 9 )"
+/etc/grub.d/10_linux_zfs:610:    # We must align initrds with kernels.
+/etc/grub.d/10_linux_zfs:612:    oldIFS="$IFS"
+/etc/grub.d/10_linux_zfs:614:    set -- $(get_field_from_entry "${main_entry}" 7)
+/etc/grub.d/10_linux_zfs:615:    for kernel in $(get_field_from_entry "${main_entry}" 8); do
+/etc/grub.d/10_linux_zfs:617:        initrd="$1"; shift
+/etc/grub.d/10_linux_zfs:620:        kernel_basename=$(basename "${kernel}")
+/etc/grub.d/10_linux_zfs:621:        if [ "${kernel_basename}" = "${last_used_kernel}" ]; then
+/etc/grub.d/10_linux_zfs:625:        echo "${main_entry}" | awk "BEGIN{ FS=\"\t\"; OFS=\"\t\"}    {print \$3, \$2, \"advanced\", \$4, \$1, \$6, \"$initrd\", \"$kernel\", \"$was_last_used_kernel\"}"
+/etc/grub.d/10_linux_zfs:627:    IFS="$oldIFS"
+/etc/grub.d/10_linux_zfs:632:    local entries="$1"
+/etc/grub.d/10_linux_zfs:633:    local main_dataset_name="$2"
+/etc/grub.d/10_linux_zfs:634:    local main_dataset_releasename="$3"
+/etc/grub.d/10_linux_zfs:636:    if [ -z "${entries}" ]; then
+/etc/grub.d/10_linux_zfs:641:    echo "${entries}" | while read entry; do
+/etc/grub.d/10_linux_zfs:644:        snap_dataset_name="$(get_field_from_entry "${entry}" 1)"
+/etc/grub.d/10_linux_zfs:646:        snapname="${snap_dataset_name##*@}"
+/etc/grub.d/10_linux_zfs:648:        if [ "${snapname}" = "${snap_dataset_name}" ]; then
+/etc/grub.d/10_linux_zfs:649:            snapname="${snap_dataset_name##${main_dataset_name}_}"
+/etc/grub.d/10_linux_zfs:652:            snapname="${snapname##*/}"
+/etc/grub.d/10_linux_zfs:656:        if echo "${snapname}" | grep -q "^autozsys_"; then
+/etc/grub.d/10_linux_zfs:661:        releasename=$(get_field_from_entry "${entry}" 4)
+/etc/grub.d/10_linux_zfs:662:        if [ "${releasename}" = "${main_dataset_releasename}" ]; then
+/etc/grub.d/10_linux_zfs:667:        foo="$(get_field_from_entry "${entry}" 5)"
+/etc/grub.d/10_linux_zfs:668:        snapdate="$(date -d @$(get_field_from_entry "${entry}" 5) "+%x @ %H:%M")"
+/etc/grub.d/10_linux_zfs:675:        if [ "${snapname}" = "" -a "${releasename}" = "" ]; then
+/etc/grub.d/10_linux_zfs:676:            name="${snapdate}"
+/etc/grub.d/10_linux_zfs:677:        elif [ "${snapname}" = "" -a "${releasename}" != "" ]; then
+/etc/grub.d/10_linux_zfs:678:            name=$(gettext_printf "%s on %s" "${releasename}" "${snapdate}")
+/etc/grub.d/10_linux_zfs:679:        elif [ "${snapname}" != "" -a "${releasename}" = "" ]; then
+/etc/grub.d/10_linux_zfs:680:            name=$(gettext_printf "%s on %s" "${snapname}" "${snapdate}")
+/etc/grub.d/10_linux_zfs:682:            name=$(gettext_printf "%s, %s on %s" "${snapname}" "${releasename}" "${snapdate}")
+/etc/grub.d/10_linux_zfs:687:        initrd=$(get_field_from_entry "${entry}" 7 | cut -d'|' -f1)
+/etc/grub.d/10_linux_zfs:688:        kernel=$(get_field_from_entry "${entry}" 8 | cut -d'|' -f1)
+/etc/grub.d/10_linux_zfs:689:        last_used_kernel="$(get_field_from_entry "${entry}" 9)"
+/etc/grub.d/10_linux_zfs:691:        # We must align initrds with kernels.
+/etc/grub.d/10_linux_zfs:693:        oldIFS="$IFS"
+/etc/grub.d/10_linux_zfs:695:        set -- $(get_field_from_entry "${entry}" 7)
+/etc/grub.d/10_linux_zfs:696:        for k in $(get_field_from_entry "${entry}" 8); do
+/etc/grub.d/10_linux_zfs:698:            candidate_initrd="$1"; shift
+/etc/grub.d/10_linux_zfs:700:            kernel_basename=$(basename -- "${k}")
+/etc/grub.d/10_linux_zfs:701:            if [ "${kernel_basename}" = "${last_used_kernel}" ]; then
+/etc/grub.d/10_linux_zfs:702:                kernel="${k}"
+/etc/grub.d/10_linux_zfs:703:                initrd="${candidate_initrd}"
+/etc/grub.d/10_linux_zfs:707:        IFS="$oldIFS"
+/etc/grub.d/10_linux_zfs:709:        echo "${entry}" | awk "BEGIN{ FS=\"\t\"; OFS=\"\t\"}    {print \$3, \$2, \"history\", \"$name\", \$1, \$6, \"$initrd\", \"$kernel\"}"
+/etc/grub.d/10_linux_zfs:716:    local bootlist="$1"
+/etc/grub.d/10_linux_zfs:719:    for machineid in $(get_machines_sorted "${bootlist}"); do
+/etc/grub.d/10_linux_zfs:720:        entries="$(sort_entries_for_machineid "${bootlist}" ${machineid})"
+/etc/grub.d/10_linux_zfs:721:        main_entry="$(get_main_entry "${entries}")"
+/etc/grub.d/10_linux_zfs:723:        if [ -z "$main_entry" ]; then
+/etc/grub.d/10_linux_zfs:727:        main_entry_meta "${main_entry}"
+/etc/grub.d/10_linux_zfs:728:        advanced_entries_meta "${main_entry}"
+/etc/grub.d/10_linux_zfs:730:        main_dataset_name="$(get_field_from_entry "${main_entry}" 1)"
+/etc/grub.d/10_linux_zfs:731:        main_dataset_releasename="$(get_field_from_entry "${main_entry}" 4)"
+/etc/grub.d/10_linux_zfs:732:        # grep -v errcode != 0 if there is no match. || true to not fail with -e
+/etc/grub.d/10_linux_zfs:733:        other_entries="$(echo "${entries}" | grep -v "${main_entry}" || true)"
+/etc/grub.d/10_linux_zfs:734:        history_entries_meta "${other_entries}" "${main_dataset_name}" "${main_dataset_releasename}"
+/etc/grub.d/10_linux_zfs:744:	set gfxpayload="${1}"
+/etc/grub.d/10_linux_zfs:746:    if [ "${vt_handoff}" = 1 ]; then
+/etc/grub.d/10_linux_zfs:748:	if [ "${1}" = "keep" ]; then
+/etc/grub.d/10_linux_zfs:749:		set vt_handoff=vt.handoff=1
+/etc/grub.d/10_linux_zfs:759:    # Use ELILO's generic "efifb" when it's known to be available.
+/etc/grub.d/10_linux_zfs:760:    # FIXME: We need an interface to select vesafb in case efifb can't be used.
+/etc/grub.d/10_linux_zfs:761:    GRUB_GFXPAYLOAD_LINUX="${GRUB_GFXPAYLOAD_LINUX:-}"
+/etc/grub.d/10_linux_zfs:762:    if [ "${GRUB_GFXPAYLOAD_LINUX}" != "" ] || [ "${gfxpayload_dynamic}" = 0 ]; then
+/etc/grub.d/10_linux_zfs:763:        echo "set linux_gfx_mode=${GRUB_GFXPAYLOAD_LINUX}"
+/etc/grub.d/10_linux_zfs:766:if [ "\${recordfail}" != 1 ]; then
+/etc/grub.d/10_linux_zfs:767:  if [ -e \${prefix}/gfxblacklist.txt ]; then
+/etc/grub.d/10_linux_zfs:768:    if hwmatch \${prefix}/gfxblacklist.txt 3; then
+/etc/grub.d/10_linux_zfs:769:      if [ \${match} = 0 ]; then
+/etc/grub.d/10_linux_zfs:791:# $1: boot_device
+/etc/grub.d/10_linux_zfs:792:# $2: submenu_level
+/etc/grub.d/10_linux_zfs:794:    local boot_device="$1"
+/etc/grub.d/10_linux_zfs:795:    local submenu_level="$2"
+/etc/grub.d/10_linux_zfs:797:    local boot_device_idx="$(echo ${boot_device} | tr '/' '_')"
+/etc/grub.d/10_linux_zfs:799:    cache_file="${ZFSTMP}/$(echo boot_device${boot_device_idx})"
+/etc/grub.d/10_linux_zfs:800:    if [ ! -f "${cache_file}" ]; then
+/etc/grub.d/10_linux_zfs:802:        echo "$(prepare_grub_to_access_device "${boot_device}")" > "${cache_file}"
+/etc/grub.d/10_linux_zfs:805:            submenu_indentation="$(printf %${i}s | tr " " "${grub_tab}")"
+/etc/grub.d/10_linux_zfs:806:            sed "s/^/${submenu_indentation}	/" "${cache_file}" > "${cache_file}--${i}"
+/etc/grub.d/10_linux_zfs:810:    cat "${cache_file}--${submenu_level}"
+/etc/grub.d/10_linux_zfs:816:    submenu_level="$1"
+/etc/grub.d/10_linux_zfs:817:    title="$2"
+/etc/grub.d/10_linux_zfs:818:    type="$3"
+/etc/grub.d/10_linux_zfs:819:    dataset="$4"
+/etc/grub.d/10_linux_zfs:820:    boot_device="$5"
+/etc/grub.d/10_linux_zfs:821:    initrd="$6"
+/etc/grub.d/10_linux_zfs:822:    kernel="$7"
+/etc/grub.d/10_linux_zfs:823:    kernel_version="$8"
+/etc/grub.d/10_linux_zfs:824:    kernel_additional_args="${9:-}"
+/etc/grub.d/10_linux_zfs:825:    boot_devices="${10:-}"
+/etc/grub.d/10_linux_zfs:827:    submenu_indentation="$(printf %${submenu_level}s | tr " " "${grub_tab}")"
+/etc/grub.d/10_linux_zfs:829:    echo "${submenu_indentation}menuentry '$(echo "${title}" | grub_quote)' ${CLASS} \${menuentry_id_option} 'gnulinux-${dataset}-${kernel_version}' {"
+/etc/grub.d/10_linux_zfs:831:    if [ "${quick_boot}" = 1 ]; then
+/etc/grub.d/10_linux_zfs:832:        echo "${submenu_indentation}	recordfail"
+/etc/grub.d/10_linux_zfs:835:    if [ "${type}" != "recovery" ] ; then
+/etc/grub.d/10_linux_zfs:836:        GRUB_SAVEDEFAULT=${GRUB_SAVEDEFAULT:-}
+/etc/grub.d/10_linux_zfs:837:        default_entry="$(save_default_entry)"
+/etc/grub.d/10_linux_zfs:838:        if [ -n "${default_entry}" ]; then
+/etc/grub.d/10_linux_zfs:839:            echo "${submenu_indentation}	${default_entry}"
+/etc/grub.d/10_linux_zfs:843:    # Use ELILO's generic "efifb" when it's known to be available.
+/etc/grub.d/10_linux_zfs:844:    # FIXME: We need an interface to select vesafb in case efifb can't be used.
+/etc/grub.d/10_linux_zfs:845:    if [ "${GRUB_GFXPAYLOAD_LINUX}" = "" ]; then
+/etc/grub.d/10_linux_zfs:846:        echo "${submenu_indentation}	load_video"
+/etc/grub.d/10_linux_zfs:848:        if [ "${GRUB_GFXPAYLOAD_LINUX}" != "text" ]; then
+/etc/grub.d/10_linux_zfs:849:            echo "${submenu_indentation}	load_video"
+/etc/grub.d/10_linux_zfs:853:    if ([ "${ubuntu_recovery}" = 0 ] || [ "${type}" != "recovery" ]) && \
+/etc/grub.d/10_linux_zfs:854:        ([ "${GRUB_GFXPAYLOAD_LINUX}" != "" ] || [ "${gfxpayload_dynamic}" = 1 ]); then
+/etc/grub.d/10_linux_zfs:855:        echo "${submenu_indentation}	gfxmode \${linux_gfx_mode}"
+/etc/grub.d/10_linux_zfs:858:    echo "${submenu_indentation}	insmod gzio"
+/etc/grub.d/10_linux_zfs:859:    echo "${submenu_indentation}	if [ \"\${grub_platform}\" = xen ]; then insmod xzio; insmod lzopio; fi"
+/etc/grub.d/10_linux_zfs:861:    if [ -n "$boot_devices" ]; then
+/etc/grub.d/10_linux_zfs:862:        for device in ${boot_devices}; do
+/etc/grub.d/10_linux_zfs:863:            echo "${submenu_indentation}	if [ "${boot_device}" = "${device}" ]; then"
+/etc/grub.d/10_linux_zfs:864:            echo "$(prepare_grub_to_access_device_cached "${device}" $(( submenu_level +1 )) )"
+/etc/grub.d/10_linux_zfs:865:            echo "${submenu_indentation}	fi"
+/etc/grub.d/10_linux_zfs:868:        echo "$(prepare_grub_to_access_device_cached "${boot_device}" "${submenu_level}")"
+/etc/grub.d/10_linux_zfs:871:    if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
+/etc/grub.d/10_linux_zfs:872:        echo "${submenu_indentation}	echo $(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)"
+/etc/grub.d/10_linux_zfs:875:    linux_default_args="${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+/etc/grub.d/10_linux_zfs:876:    if [ ${type} = "recovery" ]; then
+/etc/grub.d/10_linux_zfs:877:        linux_default_args="${GRUB_CMDLINE_LINUX_RECOVERY} ${GRUB_CMDLINE_LINUX}"
+/etc/grub.d/10_linux_zfs:881:    echo "${submenu_indentation}	linux	\"${kernel}\" root=ZFS=\"${dataset}\" ro $(echo ${linux_default_args} ${kernel_additional_args})"
+/etc/grub.d/10_linux_zfs:883:    if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
+/etc/grub.d/10_linux_zfs:884:        echo "${submenu_indentation}	echo '$(gettext_printf "Loading initial ramdisk ..." | grub_quote)'"
+/etc/grub.d/10_linux_zfs:886:    echo "${submenu_indentation}	initrd	\"${initrd}\""
+/etc/grub.d/10_linux_zfs:887:    echo "${submenu_indentation}}"
+/etc/grub.d/10_linux_zfs:891:# $1 menu metadata
+/etc/grub.d/10_linux_zfs:893:    local menu_metadata="$1"
+/etc/grub.d/10_linux_zfs:899:    if [ -z "${menu_metadata}" ]; then
+/etc/grub.d/10_linux_zfs:905:    if [ "${GRUB_DISTRIBUTOR}" = "" ] ; then
+/etc/grub.d/10_linux_zfs:908:        case ${GRUB_DISTRIBUTOR} in
+/etc/grub.d/10_linux_zfs:910:            OS="${GRUB_DISTRIBUTOR}"
+/etc/grub.d/10_linux_zfs:913:            OS="${GRUB_DISTRIBUTOR} GNU/Linux"
+/etc/grub.d/10_linux_zfs:916:        CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1 | LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
+/etc/grub.d/10_linux_zfs:924:    if [ "${ubuntu_recovery}" = 1 ]; then
+/etc/grub.d/10_linux_zfs:925:        GRUB_CMDLINE_LINUX_RECOVERY="${GRUB_CMDLINE_LINUX_RECOVERY} nomodeset"
+/etc/grub.d/10_linux_zfs:928:    case "$GENKERNEL_ARCH" in
+/etc/grub.d/10_linux_zfs:929:        x86*) GRUB_CMDLINE_LINUX_RECOVERY="$GRUB_CMDLINE_LINUX_RECOVERY dis_ucode_ldr";;
+/etc/grub.d/10_linux_zfs:933:    if [ "${vt_handoff}" = 1 ]; then
+/etc/grub.d/10_linux_zfs:934:        for word in ${GRUB_CMDLINE_LINUX_DEFAULT}; do
+/etc/grub.d/10_linux_zfs:935:            if [ "${word}" = splash ]; then
+/etc/grub.d/10_linux_zfs:936:                GRUB_CMDLINE_LINUX_DEFAULT="${GRUB_CMDLINE_LINUX_DEFAULT} \${vt_handoff}"
+/etc/grub.d/10_linux_zfs:945:	# $1: root dataset (eg rpool/ROOT/ubuntu_2zhm07@autozsys_k56fr6)
+/etc/grub.d/10_linux_zfs:946:	# $2: boot device id (eg 411f29ce1557bfed)
+/etc/grub.d/10_linux_zfs:947:	# $3: initrd (eg /BOOT/ubuntu_2zhm07@autozsys_k56fr6/initrd.img-5.4.0-21-generic)
+/etc/grub.d/10_linux_zfs:948:	# $4: kernel (eg /BOOT/ubuntu_2zhm07@autozsys_k56fr6/vmlinuz-5.4.0-21-generic)
+/etc/grub.d/10_linux_zfs:949:	# $5: kernel_version (eg 5.4.0-21-generic)
+/etc/grub.d/10_linux_zfs:951:	set root_dataset="${1}"
+/etc/grub.d/10_linux_zfs:952:	set boot_device="${2}"
+/etc/grub.d/10_linux_zfs:953:	set initrd="${3}"
+/etc/grub.d/10_linux_zfs:954:	set kernel="${4}"
+/etc/grub.d/10_linux_zfs:955:	set kversion="${5}"
+/etc/grub.d/10_linux_zfs:958:    boot_devices=$(echo "${menu_metadata}" | cut -d"$(printf '\t')" -f6 | sort -u)
+/etc/grub.d/10_linux_zfs:960:    title=$(gettext_printf "Revert system only")
+/etc/grub.d/10_linux_zfs:961:    zfs_linux_entry 1 "${title}" "simple" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' '' "${boot_devices}"
+/etc/grub.d/10_linux_zfs:963:    title="$(gettext_printf "Revert system and user data")"
+/etc/grub.d/10_linux_zfs:964:    zfs_linux_entry 1 "${title}" "simple" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' 'zsys-revert=userdata' "${boot_devices}"
+/etc/grub.d/10_linux_zfs:966:    GRUB_DISABLE_RECOVERY="${GRUB_DISABLE_RECOVERY:-}"
+/etc/grub.d/10_linux_zfs:967:    if [ "${GRUB_DISABLE_RECOVERY}" != "true" ]; then
+/etc/grub.d/10_linux_zfs:968:        title="$(gettext_printf "Revert system only (%s)" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
+/etc/grub.d/10_linux_zfs:969:        zfs_linux_entry 1 "${title}" "recovery" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' '' "${boot_devices}"
+/etc/grub.d/10_linux_zfs:971:        title="$(gettext_printf "Revert system and user data (%s)" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
+/etc/grub.d/10_linux_zfs:972:        zfs_linux_entry 1 "${title}" "recovery" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' 'zsys-revert=userdata' "${boot_devices}"
+/etc/grub.d/10_linux_zfs:978:    echo "${menu_metadata}" |
+/etc/grub.d/10_linux_zfs:981:        have_zsys="$(which zsysd || true)"
+/etc/grub.d/10_linux_zfs:982:        while IFS="$(printf '\t')" read -r machineid iszsys section name dataset device initrd kernel opt; do
+/etc/grub.d/10_linux_zfs:984:            # Disable history for non zsys system or if systems is a zsys one and zsys isn't installed.
+/etc/grub.d/10_linux_zfs:986:            # in upstream zfs which makes it incompatible. Don't show history for now.
+/etc/grub.d/10_linux_zfs:987:            if [ "${section}" = "history" ]; then
+/etc/grub.d/10_linux_zfs:988:                if [ "${iszsys}" != "yes" ] || [ "${iszsys}" = "yes" -a -z "${have_zsys}" ]; then
+/etc/grub.d/10_linux_zfs:993:            if [ "${last_section}" != "${section}" -a -n "${last_section}" ]; then
+/etc/grub.d/10_linux_zfs:995:                if [ "${last_section}" != "main" ]; then
+/etc/grub.d/10_linux_zfs:1001:            case "${section}" in
+/etc/grub.d/10_linux_zfs:1003:                    title="${name}"
+/etc/grub.d/10_linux_zfs:1004:                    main_dataset_name="${name}"
+/etc/grub.d/10_linux_zfs:1005:                    main_dataset="${dataset}"
+/etc/grub.d/10_linux_zfs:1007:                    kernel_version=$(basename "${kernel}" | sed -e "s,^[^0-9]*-,,g")
+/etc/grub.d/10_linux_zfs:1008:                    zfs_linux_entry 0 "${title}" "simple" "${dataset}" "${device}" "${initrd}" "${kernel}" "${kernel_version}"
+/etc/grub.d/10_linux_zfs:1013:                    if [ "${last_section}" != "${section}" ]; then
+/etc/grub.d/10_linux_zfs:1014:                        echo "submenu '$(gettext_printf "Advanced options for %s" "${main_dataset_name}" | grub_quote)' \${menuentry_id_option} 'gnulinux-advanced-${main_dataset}' {"
+/etc/grub.d/10_linux_zfs:1018:                    if [ "${opt}" = "true" ]; then
+/etc/grub.d/10_linux_zfs:1022:                    kernel_version=$(basename "${kernel}" | sed -e "s,^[^0-9]*-,,g")
+/etc/grub.d/10_linux_zfs:1023:                    title="$(gettext_printf "%s%s, with Linux %s" "${last_booted_kernel_marker}" "${name}" "${kernel_version}")"
+/etc/grub.d/10_linux_zfs:1024:                    zfs_linux_entry 1 "${title}" "advanced" "${dataset}" "${device}" "${initrd}" "${kernel}" "${kernel_version}"
+/etc/grub.d/10_linux_zfs:1026:                    GRUB_DISABLE_RECOVERY=${GRUB_DISABLE_RECOVERY:-}
+/etc/grub.d/10_linux_zfs:1027:                    if [ "${GRUB_DISABLE_RECOVERY}" != "true" ]; then
+/etc/grub.d/10_linux_zfs:1028:                        title="$(gettext_printf "%s%s, with Linux %s (%s)" "${last_booted_kernel_marker}" "${name}" "${kernel_version}" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
+/etc/grub.d/10_linux_zfs:1029:                        zfs_linux_entry 1 "${title}" "recovery" "${dataset}" "${device}" "${initrd}" "${kernel}" "${kernel_version}"
+/etc/grub.d/10_linux_zfs:1036:                    if [ "${last_section}" != "${section}" ]; then
+/etc/grub.d/10_linux_zfs:1037:                        echo "submenu '$(gettext_printf "History for %s" "${main_dataset_name}" | grub_quote)' \${menuentry_id_option} 'gnulinux-history-${main_dataset}' {"
+/etc/grub.d/10_linux_zfs:1040:                    if [ "${iszsys}" = "yes" ]; then
+/etc/grub.d/10_linux_zfs:1041:                        title="$(gettext_printf "Revert to %s" "${name}" | grub_quote)"
+/etc/grub.d/10_linux_zfs:1043:                        title="$(gettext_printf "Boot on %s" "${name}" | grub_quote)"
+/etc/grub.d/10_linux_zfs:1045:                    echo "	submenu '${title}' \${menuentry_id_option} 'gnulinux-history-${dataset}' {"
+/etc/grub.d/10_linux_zfs:1047:                    kernel_version=$(basename "${kernel}" | sed -e "s,^[^0-9]*-,,g")
+/etc/grub.d/10_linux_zfs:1050:                    if [ "${iszsys}" = "yes" ]; then
+/etc/grub.d/10_linux_zfs:1051:                        echo "${grub_tab}${grub_tab}zsyshistorymenu" \"${dataset}\" \"${device}\" \"${initrd}\" \"${kernel}\" \"${kernel_version}\"
+/etc/grub.d/10_linux_zfs:1054:                        title="$(gettext_printf "One time boot")"
+/etc/grub.d/10_linux_zfs:1055:                        zfs_linux_entry 2 "${title}" "simple" "${dataset}" "${device}" "${initrd}" "${kernel}" "${kernel_version}"
+/etc/grub.d/10_linux_zfs:1057:                        GRUB_DISABLE_RECOVERY="${GRUB_DISABLE_RECOVERY:-}"
+/etc/grub.d/10_linux_zfs:1058:                        if [ "${GRUB_DISABLE_RECOVERY}" != "true" ]; then
+/etc/grub.d/10_linux_zfs:1059:                            title="$(gettext_printf "One time boot (%s)" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
+/etc/grub.d/10_linux_zfs:1060:                            zfs_linux_entry 2 "${title}" "recovery" "${dataset}" "${device}" "${initrd}" "${kernel}" "${kernel_version}"
+/etc/grub.d/10_linux_zfs:1063:                        title="$(gettext_printf "Revert system (all intermediate snapshots will be destroyed)")"
+/etc/grub.d/10_linux_zfs:1064:                        zfs_linux_entry 2 "${title}" "simple" "${dataset}" "${device}" "${initrd}" "${kernel}" "${kernel_version}" "rollback=yes"
+/etc/grub.d/10_linux_zfs:1071:                    grub_warn "unknown section: ${section}. Ignoring entry ${name} for ${dataset}"
+/etc/grub.d/10_linux_zfs:1074:            last_section="${section}"
+/etc/grub.d/10_linux_zfs:1077:        if [ "${at_least_one_entry}" -eq 1 ]; then
+/etc/grub.d/10_linux_zfs:1084:# $1: content to write
+/etc/grub.d/10_linux_zfs:1085:# $2: destination file
+/etc/grub.d/10_linux_zfs:1087:    content="$1"
+/etc/grub.d/10_linux_zfs:1088:    dest="$2"
+/etc/grub.d/10_linux_zfs:1090:    if [ -z "${content}" ]; then
+/etc/grub.d/10_linux_zfs:1091:        rm -f "${dest}"
+/etc/grub.d/10_linux_zfs:1092:        touch "${dest}"
+/etc/grub.d/10_linux_zfs:1095:    echo "${content}" > "${dest}"
+/etc/grub.d/10_linux_zfs:1099:GRUB_LINUX_ZFS_TEST="${GRUB_LINUX_ZFS_TEST:-}"
+/etc/grub.d/10_linux_zfs:1100:case "${GRUB_LINUX_ZFS_TEST}" in
+/etc/grub.d/10_linux_zfs:1103:        imported_pools=$(import_pools)
+/etc/grub.d/10_linux_zfs:1104:        boot_list="$(bootlist ${MNTDIR})"
+/etc/grub.d/10_linux_zfs:1105:        trailing_newline_if_not_empty "${boot_list}" "${GRUB_LINUX_ZFS_TEST_OUTPUT}"
+/etc/grub.d/10_linux_zfs:1109:        boot_list="$(cat ${GRUB_LINUX_ZFS_TEST_INPUT})"
+/etc/grub.d/10_linux_zfs:1110:        menu_metadata="$(generate_grub_menu_metadata "${boot_list}")"
+/etc/grub.d/10_linux_zfs:1111:        trailing_newline_if_not_empty "${menu_metadata}" "${GRUB_LINUX_ZFS_TEST_OUTPUT}"
+/etc/grub.d/10_linux_zfs:1115:        menu_metadata="$(cat ${GRUB_LINUX_ZFS_TEST_INPUT})"
+/etc/grub.d/10_linux_zfs:1116:        grub_menu=$(generate_grub_menu "${menu_metadata}")
+/etc/grub.d/10_linux_zfs:1117:        trailing_newline_if_not_empty "${grub_menu}" "${GRUB_LINUX_ZFS_TEST_OUTPUT}"
+/etc/grub.d/10_linux_zfs:1122:        imported_pools=$(import_pools)
+/etc/grub.d/10_linux_zfs:1124:        boot_list="$(bootlist ${MNTDIR})"
+/etc/grub.d/10_linux_zfs:1126:        menu_metadata="$(generate_grub_menu_metadata "${boot_list}")"
+/etc/grub.d/10_linux_zfs:1128:        grub_menu="$(generate_grub_menu "${menu_metadata}")"
+/etc/grub.d/10_linux_zfs:1129:        if [ -n "${grub_menu}" ]; then
+/etc/grub.d/10_linux_zfs:1131:            echo "${grub_menu}"
+/etc/grub.d/20_linux_xen:4:# grub-mkconfig helper script.
+/etc/grub.d/20_linux_xen:5:# Copyright (C) 2006,2007,2008,2009,2010  Free Software Foundation, Inc.
+/etc/grub.d/20_linux_xen:10:# (at your option) any later version.
+/etc/grub.d/20_linux_xen:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/20_linux_xen:15:# GNU General Public License for more details.
+/etc/grub.d/20_linux_xen:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/20_linux_xen:24:. "$pkgdatadir/grub-mkconfig_lib"
+/etc/grub.d/20_linux_xen:27:export TEXTDOMAINDIR="${datarootdir}/locale"
+/etc/grub.d/20_linux_xen:31:if [ "x${GRUB_DISTRIBUTOR}" = "x" ] ; then
+/etc/grub.d/20_linux_xen:34:  OS="${GRUB_DISTRIBUTOR} GNU/Linux"
+/etc/grub.d/20_linux_xen:35:  CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1|LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
+/etc/grub.d/20_linux_xen:39:# the initrds that Linux uses don't like that.
+/etc/grub.d/20_linux_xen:40:case ${GRUB_DEVICE} in
+/etc/grub.d/20_linux_xen:42:    GRUB_DEVICE=`losetup ${GRUB_DEVICE} | sed -e "s/^[^(]*(\([^)]\+\)).*/\1/"`
+/etc/grub.d/20_linux_xen:43:    # We can't cope with devices loop-mounted from files here.
+/etc/grub.d/20_linux_xen:44:    case ${GRUB_DEVICE} in
+/etc/grub.d/20_linux_xen:51:: ${GRUB_CMDLINE_LINUX_RECOVERY:=single}
+/etc/grub.d/20_linux_xen:54:# older kernels.
+/etc/grub.d/20_linux_xen:55:: ${GRUB_DISABLE_LINUX_PARTUUID=true}
+/etc/grub.d/20_linux_xen:57:# btrfs may reside on multiple devices. We cannot pass them as value of root= parameter
+/etc/grub.d/20_linux_xen:58:# and mounting btrfs requires user space scanning, so force UUID in this case.
+/etc/grub.d/20_linux_xen:59:if ( [ "x${GRUB_DEVICE_UUID}" = "x" ] && [ "x${GRUB_DEVICE_PARTUUID}" = "x" ] ) \
+/etc/grub.d/20_linux_xen:60:    || ( [ "x${GRUB_DISABLE_LINUX_UUID}" = "xtrue" ] \
+/etc/grub.d/20_linux_xen:61:	&& [ "x${GRUB_DISABLE_LINUX_PARTUUID}" = "xtrue" ] ) \
+/etc/grub.d/20_linux_xen:62:    || ( ! test -e "/dev/disk/by-uuid/${GRUB_DEVICE_UUID}" \
+/etc/grub.d/20_linux_xen:63:	&& ! test -e "/dev/disk/by-partuuid/${GRUB_DEVICE_PARTUUID}" ) \
+/etc/grub.d/20_linux_xen:64:    || ( test -e "${GRUB_DEVICE}" && uses_abstraction "${GRUB_DEVICE}" lvm ); then
+/etc/grub.d/20_linux_xen:65:  LINUX_ROOT_DEVICE=${GRUB_DEVICE}
+/etc/grub.d/20_linux_xen:66:elif [ "x${GRUB_DEVICE_UUID}" = "x" ] \
+/etc/grub.d/20_linux_xen:67:    || [ "x${GRUB_DISABLE_LINUX_UUID}" = "xtrue" ]; then
+/etc/grub.d/20_linux_xen:68:  LINUX_ROOT_DEVICE=PARTUUID=${GRUB_DEVICE_PARTUUID}
+/etc/grub.d/20_linux_xen:70:  LINUX_ROOT_DEVICE=UUID=${GRUB_DEVICE_UUID}
+/etc/grub.d/20_linux_xen:73:# Allow overriding GRUB_CMDLINE_LINUX and GRUB_CMDLINE_LINUX_DEFAULT.
+/etc/grub.d/20_linux_xen:74:if [ "${GRUB_CMDLINE_LINUX_XEN_REPLACE}" ]; then
+/etc/grub.d/20_linux_xen:75:  GRUB_CMDLINE_LINUX="${GRUB_CMDLINE_LINUX_XEN_REPLACE}"
+/etc/grub.d/20_linux_xen:77:if [ "${GRUB_CMDLINE_LINUX_XEN_REPLACE_DEFAULT}" ]; then
+/etc/grub.d/20_linux_xen:78:  GRUB_CMDLINE_LINUX_DEFAULT="${GRUB_CMDLINE_LINUX_XEN_REPLACE_DEFAULT}"
+/etc/grub.d/20_linux_xen:81:case x"$GRUB_FS" in
+/etc/grub.d/20_linux_xen:84:	rootsubvol="${rootsubvol#/}"
+/etc/grub.d/20_linux_xen:85:	if [ "x${rootsubvol}" != x ]; then
+/etc/grub.d/20_linux_xen:86:	    GRUB_CMDLINE_LINUX="rootflags=subvol=${rootsubvol} ${GRUB_CMDLINE_LINUX}"
+/etc/grub.d/20_linux_xen:89:	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
+/etc/grub.d/20_linux_xen:90:	bootfs="`make_system_path_relative_to_its_root / | sed -e "s,@$,,"`"
+/etc/grub.d/20_linux_xen:91:	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
+/etc/grub.d/20_linux_xen:99:  linux_entry_xsm "$@" false
+/etc/grub.d/20_linux_xen:100:  linux_entry_xsm "$@" true
+/etc/grub.d/20_linux_xen:104:  os="$1"
+/etc/grub.d/20_linux_xen:105:  version="$2"
+/etc/grub.d/20_linux_xen:106:  entry_xen_version="$3"
+/etc/grub.d/20_linux_xen:107:  type="$4"
+/etc/grub.d/20_linux_xen:108:  args="$5"
+/etc/grub.d/20_linux_xen:109:  xen_args="$6"
+/etc/grub.d/20_linux_xen:110:  xsm="$7"
+/etc/grub.d/20_linux_xen:112:  # corresponding policy file.
+/etc/grub.d/20_linux_xen:114:  if ${xsm} ; then
+/etc/grub.d/20_linux_xen:115:      xenpolicy="xenpolicy-$entry_xen_version"
+/etc/grub.d/20_linux_xen:116:      if test ! -e "${xen_dirname}/${xenpolicy}" ; then
+/etc/grub.d/20_linux_xen:119:      xen_args="$xen_args flask=enforcing"
+/etc/grub.d/20_linux_xen:120:      entry_xen_version="$(gettext_printf "%s (XSM enabled)" "$entry_xen_version")"
+/etc/grub.d/20_linux_xen:123:  if [ -z "$boot_device_id" ]; then
+/etc/grub.d/20_linux_xen:124:      boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+/etc/grub.d/20_linux_xen:126:  if [ x$type != xsimple ] ; then
+/etc/grub.d/20_linux_xen:127:      if [ x$type = xrecovery ] ; then
+/etc/grub.d/20_linux_xen:128:	  title="$(gettext_printf "%s, with Xen %s and Linux %s (%s)" "${os}" "${entry_xen_version}" "${version}" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
+/etc/grub.d/20_linux_xen:130:	  title="$(gettext_printf "%s, with Xen %s and Linux %s" "${os}" "${entry_xen_version}" "${version}")"
+/etc/grub.d/20_linux_xen:132:      replacement_title="$(echo "Advanced options for ${OS}" | sed 's,>,>>,g')>$(echo "$title" | sed 's,>,>>,g')"
+/etc/grub.d/20_linux_xen:133:      if [ x"Xen ${entry_xen_version}>$title" = x"$GRUB_ACTUAL_DEFAULT" ]; then
+/etc/grub.d/20_linux_xen:134:         quoted="$(echo "$GRUB_ACTUAL_DEFAULT" | grub_quote)"
+/etc/grub.d/20_linux_xen:135:         title_correction_code="${title_correction_code}if [ \"x\$default\" = '$quoted' ]; then default='$(echo "$replacement_title" | grub_quote)'; fi;"
+/etc/grub.d/20_linux_xen:136:         grub_warn "$(gettext_printf "Please don't use old title \`%s' for GRUB_DEFAULT, use \`%s' (for versions before 2.00) or \`%s' (for 2.00 or later)" "$GRUB_ACTUAL_DEFAULT" "$replacement_title" "gnulinux-advanced-$boot_device_id>gnulinux-$version-$type-$boot_device_id")"
+/etc/grub.d/20_linux_xen:138:      echo "menuentry '$(echo "$title" | grub_quote)' ${CLASS} \$menuentry_id_option 'xen-gnulinux-$version-$type-$boot_device_id' {" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/20_linux_xen:140:      title="$(gettext_printf "%s, with Xen hypervisor" "${os}")"
+/etc/grub.d/20_linux_xen:141:      echo "menuentry '$(echo "$title" | grub_quote)' ${CLASS} \$menuentry_id_option 'xen-gnulinux-simple-$boot_device_id' {" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/20_linux_xen:143:  if [ x$type != xrecovery ] ; then
+/etc/grub.d/20_linux_xen:144:      save_default_entry | grub_add_tab | sed "s/^/$submenu_indentation/"
+/etc/grub.d/20_linux_xen:147:  if [ -z "${prepare_boot_cache}" ]; then
+/etc/grub.d/20_linux_xen:148:    prepare_boot_cache="$(prepare_grub_to_access_device ${GRUB_DEVICE_BOOT} | grub_add_tab)"
+/etc/grub.d/20_linux_xen:150:  printf '%s\n' "${prepare_boot_cache}" | sed "s/^/$submenu_indentation/"
+/etc/grub.d/20_linux_xen:151:  xmessage="$(gettext_printf "Loading Xen %s ..." ${entry_xen_version})"
+/etc/grub.d/20_linux_xen:152:  lmessage="$(gettext_printf "Loading Linux %s ..." ${version})"
+/etc/grub.d/20_linux_xen:153:  sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/20_linux_xen:154:	echo	'$(echo "$xmessage" | grub_quote)'
+/etc/grub.d/20_linux_xen:155:        if [ "\$grub_platform" = "pc" -o "\$grub_platform" = "" ]; then
+/etc/grub.d/20_linux_xen:160:	${xen_loader}	${rel_xen_dirname}/${xen_basename} placeholder ${xen_args} \${xen_rm_opts}
+/etc/grub.d/20_linux_xen:161:	echo	'$(echo "$lmessage" | grub_quote)'
+/etc/grub.d/20_linux_xen:162:	${module_loader}	${rel_dirname}/${basename} placeholder root=${linux_root_device_thisversion} ro ${args}
+/etc/grub.d/20_linux_xen:164:  if test -n "${initrd}" ; then
+/etc/grub.d/20_linux_xen:165:    # TRANSLATORS: ramdisk isn't identifier. Should be translated.
+/etc/grub.d/20_linux_xen:166:    message="$(gettext_printf "Loading initial ramdisk ...")"
+/etc/grub.d/20_linux_xen:168:    for i in ${initrd}; do
+/etc/grub.d/20_linux_xen:169:       initrd_path="${rel_dirname}/${i}"
+/etc/grub.d/20_linux_xen:170:       sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/20_linux_xen:171:	echo	'$(echo "$message" | grub_quote)'
+/etc/grub.d/20_linux_xen:172:	${module_loader}	--nounzip   $(echo $initrd_path)
+/etc/grub.d/20_linux_xen:176:  if ${xsm} && test -n "${xenpolicy}" ; then
+/etc/grub.d/20_linux_xen:177:    message="$(gettext_printf "Loading XSM policy ...")"
+/etc/grub.d/20_linux_xen:178:    sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/20_linux_xen:179:	echo	'$(echo "$message" | grub_quote)'
+/etc/grub.d/20_linux_xen:180:	${module_loader}     ${rel_dirname}/${xenpolicy}
+/etc/grub.d/20_linux_xen:183:  sed "s/^/$submenu_indentation/" << EOF
+/etc/grub.d/20_linux_xen:190:    if grub_file_is_not_garbage "$i"; then
+/etc/grub.d/20_linux_xen:191:    	basename=$(basename $i)
+/etc/grub.d/20_linux_xen:192:	version=$(echo $basename | sed -e "s,^[^0-9]*-,,g")
+/etc/grub.d/20_linux_xen:193:	dirname=$(dirname $i)
+/etc/grub.d/20_linux_xen:195:	for j in "${dirname}/config-${version}" "${dirname}/config-${alt_version}" "/etc/kernels/kernel-config-${version}" ; do
+/etc/grub.d/20_linux_xen:196:	    if test -e "${j}" ; then
+/etc/grub.d/20_linux_xen:197:		config="${j}"
+/etc/grub.d/20_linux_xen:201:        if (grep -qx "CONFIG_XEN_DOM0=y" "${config}" 2> /dev/null || grep -qx "CONFIG_XEN_PRIVILEGED_GUEST=y" "${config}" 2> /dev/null); then linux_list="$linux_list $i" ; fi
+/etc/grub.d/20_linux_xen:204:if [ "x${linux_list}" = "x" ] ; then
+/etc/grub.d/20_linux_xen:209:    case "$1" in
+/etc/grub.d/20_linux_xen:214:	*/*.config)
+/etc/grub.d/20_linux_xen:223:    if grub_file_is_not_garbage "$i" && file_is_not_xen_garbage "$i" ; then xen_list="$xen_list $i" ; fi
+/etc/grub.d/20_linux_xen:232:case "$machine" in
+/etc/grub.d/20_linux_xen:237:    *) GENKERNEL_ARCH="$machine" ;;
+/etc/grub.d/20_linux_xen:240:# Extra indentation to add to menu entries in a submenu. We're not in a submenu
+/etc/grub.d/20_linux_xen:241:# yet, so it's empty. In a submenu it will be equal to '\t' (one tab).
+/etc/grub.d/20_linux_xen:244:# Perform a reverse version sort on the entire xen_list and linux_list.
+/etc/grub.d/20_linux_xen:245:# Temporarily replace the '.old' suffix by ' 1' and append ' 2' for all
+/etc/grub.d/20_linux_xen:246:# other files to order the '.old' files after their non-old counterpart
+/etc/grub.d/20_linux_xen:247:# in reverse-sorted order.
+/etc/grub.d/20_linux_xen:249:reverse_sorted_xen_list=$(echo ${xen_list} | tr ' ' '\n' | sed -e 's/\.old$/ 1/; / 1$/! s/$/ 2/' | version_sort -r | sed -e 's/ 1$/.old/; s/ 2$//')
+/etc/grub.d/20_linux_xen:250:reverse_sorted_linux_list=$(echo ${linux_list} | tr ' ' '\n' | sed -e 's/\.old$/ 1/; / 1$/! s/$/ 2/' | version_sort -r | sed -e 's/ 1$/.old/; s/ 2$//')
+/etc/grub.d/20_linux_xen:252:if [ "x$GRUB_TOP_LEVEL_XEN" != x ]; then
+/etc/grub.d/20_linux_xen:253:  reverse_sorted_xen_list=$(grub_move_to_front "$GRUB_TOP_LEVEL_XEN" ${reverse_sorted_xen_list})
+/etc/grub.d/20_linux_xen:255:if [ "x$GRUB_TOP_LEVEL" != x ]; then
+/etc/grub.d/20_linux_xen:256:  reverse_sorted_linux_list=$(grub_move_to_front "$GRUB_TOP_LEVEL" ${reverse_sorted_linux_list})
+/etc/grub.d/20_linux_xen:261:for current_xen in ${reverse_sorted_xen_list}; do
+/etc/grub.d/20_linux_xen:262:    xen_basename=`basename ${current_xen}`
+/etc/grub.d/20_linux_xen:263:    xen_dirname=`dirname ${current_xen}`
+/etc/grub.d/20_linux_xen:264:    rel_xen_dirname=`make_system_path_relative_to_its_root $xen_dirname`
+/etc/grub.d/20_linux_xen:265:    xen_version=`echo $xen_basename | sed -e "s,.gz$,,g;s,^xen-,,g"`
+/etc/grub.d/20_linux_xen:266:    if [ -z "$boot_device_id" ]; then
+/etc/grub.d/20_linux_xen:267:	boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+/etc/grub.d/20_linux_xen:269:    if [ "x$is_top_level" != xtrue ]; then
+/etc/grub.d/20_linux_xen:270:	echo "	submenu '$(gettext_printf "Xen hypervisor, version %s" "${xen_version}" | grub_quote)' \$menuentry_id_option 'xen-hypervisor-$xen_version-$boot_device_id' {"
+/etc/grub.d/20_linux_xen:272:    if ($grub_file --is-arm64-efi $current_xen); then
+/etc/grub.d/20_linux_xen:276:	if ($grub_file --is-x86-multiboot2 $current_xen); then
+/etc/grub.d/20_linux_xen:286:    for i in ${GRUB_EARLY_INITRD_LINUX_STOCK} \
+/etc/grub.d/20_linux_xen:287:             ${GRUB_EARLY_INITRD_LINUX_CUSTOM}; do
+/etc/grub.d/20_linux_xen:288:       if test -e "${xen_dirname}/${i}" ; then
+/etc/grub.d/20_linux_xen:289:          initrd_early="${initrd_early} ${i}"
+/etc/grub.d/20_linux_xen:293:    for linux in ${reverse_sorted_linux_list}; do
+/etc/grub.d/20_linux_xen:294:	gettext_printf "Found linux image: %s\n" "$linux" >&2
+/etc/grub.d/20_linux_xen:295:	basename=`basename $linux`
+/etc/grub.d/20_linux_xen:296:	dirname=`dirname $linux`
+/etc/grub.d/20_linux_xen:297:	rel_dirname=`make_system_path_relative_to_its_root $dirname`
+/etc/grub.d/20_linux_xen:298:	version=`echo $basename | sed -e "s,^[^0-9]*-,,g"`
+/etc/grub.d/20_linux_xen:299:	alt_version=`echo $version | sed -e "s,\.old$,,g"`
+/etc/grub.d/20_linux_xen:300:	linux_root_device_thisversion="${LINUX_ROOT_DEVICE}"
+/etc/grub.d/20_linux_xen:303:	for i in "initrd.img-${version}" "initrd-${version}.img" \
+/etc/grub.d/20_linux_xen:304:	   "initrd-${alt_version}.img.old" "initrd-${version}.gz" \
+/etc/grub.d/20_linux_xen:305:	   "initrd-${alt_version}.gz.old" "initrd-${version}" \
+/etc/grub.d/20_linux_xen:306:	   "initramfs-${version}.img" "initramfs-${alt_version}.img.old" \
+/etc/grub.d/20_linux_xen:307:	   "initrd.img-${alt_version}" "initrd-${alt_version}.img" \
+/etc/grub.d/20_linux_xen:308:	   "initrd-${alt_version}" "initramfs-${alt_version}.img" \
+/etc/grub.d/20_linux_xen:309:	   "initramfs-genkernel-${version}" \
+/etc/grub.d/20_linux_xen:310:	   "initramfs-genkernel-${alt_version}" \
+/etc/grub.d/20_linux_xen:311:	   "initramfs-genkernel-${GENKERNEL_ARCH}-${version}" \
+/etc/grub.d/20_linux_xen:312:	   "initramfs-genkernel-${GENKERNEL_ARCH}-${alt_version}" ; do
+/etc/grub.d/20_linux_xen:313:	    if test -e "${dirname}/${i}" ; then
+/etc/grub.d/20_linux_xen:314:		initrd_real="$i"
+/etc/grub.d/20_linux_xen:320:	if test -n "${initrd_early}" || test -n "${initrd_real}"; then
+/etc/grub.d/20_linux_xen:321:	    # Xen assumes the real initrd is the first module after the kernel.
+/etc/grub.d/20_linux_xen:323:	    # with Xen option 'ucode=<scan|module number> (non-default anyway).
+/etc/grub.d/20_linux_xen:324:	    initrd="${initrd_real} ${initrd_early}"
+/etc/grub.d/20_linux_xen:327:	    for i in ${initrd}; do
+/etc/grub.d/20_linux_xen:328:		initrd_display="${initrd_display} ${dirname}/${i}"
+/etc/grub.d/20_linux_xen:330:	    gettext_printf "Found initrd image: %s\n" "$(echo $initrd_display)" >&2
+/etc/grub.d/20_linux_xen:333:	if test -z "${initrd_real}"; then
+/etc/grub.d/20_linux_xen:334:    # "UUID=" magic is parsed by initrds.  Since there's no initrd, it can't work here.
+/etc/grub.d/20_linux_xen:335:	    if [ "x${GRUB_DEVICE_PARTUUID}" = "x" ] \
+/etc/grub.d/20_linux_xen:336:		|| [ "x${GRUB_DISABLE_LINUX_PARTUUID}" = "xtrue" ]; then
+/etc/grub.d/20_linux_xen:338:		linux_root_device_thisversion=${GRUB_DEVICE}
+/etc/grub.d/20_linux_xen:340:		linux_root_device_thisversion=PARTUUID=${GRUB_DEVICE_PARTUUID}
+/etc/grub.d/20_linux_xen:346:	# enable it. This caused a lot of confusion to users that set the option to 'y',
+/etc/grub.d/20_linux_xen:347:	# 'yes' or 'true'. This was fixed but all of these values must be supported now.
+/etc/grub.d/20_linux_xen:348:	if [ "x${GRUB_DISABLE_SUBMENU}" = xyes ] || [ "x${GRUB_DISABLE_SUBMENU}" = xy ]; then
+/etc/grub.d/20_linux_xen:352:	if [ "x$is_top_level" = xtrue ] && [ "x${GRUB_DISABLE_SUBMENU}" != xtrue ]; then
+/etc/grub.d/20_linux_xen:353:	    linux_entry "${OS}" "${version}" "${xen_version}" simple \
+/etc/grub.d/20_linux_xen:354:		"${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}" "${GRUB_CMDLINE_XEN} ${GRUB_CMDLINE_XEN_DEFAULT}"
+/etc/grub.d/20_linux_xen:356:	    submenu_indentation="$grub_tab$grub_tab"
+/etc/grub.d/20_linux_xen:358:	    if [ -z "$boot_device_id" ]; then
+/etc/grub.d/20_linux_xen:359:		boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+/etc/grub.d/20_linux_xen:362:	    echo "submenu '$(gettext_printf "Advanced options for %s (with Xen hypervisor)" "${OS}" | grub_quote)' \$menuentry_id_option 'gnulinux-advanced-$boot_device_id' {"
+/etc/grub.d/20_linux_xen:363:	echo "	submenu '$(gettext_printf "Xen hypervisor, version %s" "${xen_version}" | grub_quote)' \$menuentry_id_option 'xen-hypervisor-$xen_version-$boot_device_id' {"
+/etc/grub.d/20_linux_xen:367:	linux_entry "${OS}" "${version}" "${xen_version}" advanced \
+/etc/grub.d/20_linux_xen:368:	    "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}" "${GRUB_CMDLINE_XEN} ${GRUB_CMDLINE_XEN_DEFAULT}"
+/etc/grub.d/20_linux_xen:369:	if [ "x${GRUB_DISABLE_RECOVERY}" != "xtrue" ]; then
+/etc/grub.d/20_linux_xen:370:	    linux_entry "${OS}" "${version}" "${xen_version}" recovery \
+/etc/grub.d/20_linux_xen:371:		"${GRUB_CMDLINE_LINUX_RECOVERY} ${GRUB_CMDLINE_LINUX}" "${GRUB_CMDLINE_XEN}"
+/etc/grub.d/20_linux_xen:374:    if [ x"$is_top_level" != xtrue ]; then
+/etc/grub.d/20_linux_xen:380:# add a closing '}' for the submenu command.
+/etc/grub.d/20_linux_xen:381:if [ x"$is_top_level" != xtrue ]; then
+/etc/grub.d/20_linux_xen:385:echo "$title_correction_code"
+/etc/grub.d/20_memtest86+:5:  . /usr/lib/grub/grub-mkconfig_lib
+/etc/grub.d/20_memtest86+:8:  echo "Cannot find grub config file, exiting." >&2
+/etc/grub.d/20_memtest86+:13:  GRUB_DISABLE_MEMTEST=`sed -n 's/^GRUB_DISABLE_MEMTEST=\(.*\)/\1/p' < /etc/default/grub`
+/etc/grub.d/20_memtest86+:14:  GRUB_MEMTEST_DISABLE_SERIAL=`sed -n 's/^GRUB_MEMTEST_DISABLE_SERIAL=\(.*\)/\1/p' < /etc/default/grub`
+/etc/grub.d/20_memtest86+:15:  GRUB_MEMTEST_SERIAL_PARAMS=`sed -n 's/^GRUB_MEMTEST_SERIAL_PARAMS=\(.*\)/\1/p' < /etc/default/grub`
+/etc/grub.d/20_memtest86+:18:if [ "x${GRUB_MEMTEST_SERIAL_PARAMS}" = "x" ] ; then
+/etc/grub.d/20_memtest86+:23:if [ "x${GRUB_DISABLE_MEMTEST}" = "xtrue" ] ; then
+/etc/grub.d/20_memtest86+:27:# We can't cope with loop-mounted devices here.
+/etc/grub.d/20_memtest86+:28:case ${GRUB_DEVICE_BOOT} in
+/etc/grub.d/20_memtest86+:32:prepare_boot_cache="$(prepare_grub_to_access_device ${GRUB_DEVICE_BOOT} | sed -e "s/^/\t/")"
+/etc/grub.d/20_memtest86+:36:if test -e ${efi_vars_dir} ; then
+/etc/grub.d/20_memtest86+:37:  if test -e /boot/memtest86+x64.efi && test -e /boot/grub/x86_64-efi ; then
+/etc/grub.d/20_memtest86+:38:    MEMTESTPATH=$( make_system_path_relative_to_its_root "/boot/memtest86+x64.efi" )
+/etc/grub.d/20_memtest86+:39:    echo "Found memtest86+ 64bit EFI image: $MEMTESTPATH" >&2
+/etc/grub.d/20_memtest86+:41:menuentry "Memory test (memtest86+x64.efi)" --class memtest \$menuentry_id_option 'memtest86+' {
+/etc/grub.d/20_memtest86+:43:    printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:45:        linux    $MEMTESTPATH
+/etc/grub.d/20_memtest86+:48:    if [ "x${GRUB_MEMTEST_DISABLE_SERIAL}" != "xtrue" ]; then
+/etc/grub.d/20_memtest86+:50:menuentry '$(gettext_printf "Memory test (memtest86+x64.efi, serial console)")' --class memtest \$menuentry_id_option 'memtest86+-serial' {
+/etc/grub.d/20_memtest86+:52:      printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:54:        linux   $MEMTESTPATH console=${GRUB_MEMTEST_SERIAL_PARAMS}
+/etc/grub.d/20_memtest86+:58:  elif test -e /boot/memtest86+ia32.efi && test -e /boot/grub/i386-efi ; then
+/etc/grub.d/20_memtest86+:59:    MEMTESTPATH=$( make_system_path_relative_to_its_root "/boot/memtest86+ia32.efi" )
+/etc/grub.d/20_memtest86+:60:    echo "Found memtest86+ 32bit EFI image: $MEMTESTPATH" >&2
+/etc/grub.d/20_memtest86+:62:menuentry "Memory test (memtest86+ia32.efi)" --class memtest \$menuentry_id_option 'memtest86+' {
+/etc/grub.d/20_memtest86+:64:    printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:66:        linux    $MEMTESTPATH
+/etc/grub.d/20_memtest86+:69:    if [ "x${GRUB_MEMTEST_DISABLE_SERIAL}" != "xtrue" ]; then
+/etc/grub.d/20_memtest86+:71:menuentry '$(gettext_printf "Memory test (memtest86+ia32.efi, serial console)")' --class memtest \$menuentry_id_option 'memtest86+-serial' {
+/etc/grub.d/20_memtest86+:73:      printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:75:        linux    $MEMTESTPATH console=${GRUB_MEMTEST_SERIAL_PARAMS}
+/etc/grub.d/20_memtest86+:81: if test -e /boot/memtest86+x64.bin ; then
+/etc/grub.d/20_memtest86+:82:  MEMTESTPATH=$( make_system_path_relative_to_its_root "/boot/memtest86+x64.bin" )
+/etc/grub.d/20_memtest86+:83:  echo "Found memtest86+x64 image: $MEMTESTPATH" >&2
+/etc/grub.d/20_memtest86+:85:menuentry "Memory test (memtest86+x64.bin)" --class memtest \$menuentry_id_option 'memtest86+' {
+/etc/grub.d/20_memtest86+:87:  printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:89:        linux    $MEMTESTPATH
+/etc/grub.d/20_memtest86+:92:    if [ "x${GRUB_MEMTEST_DISABLE_SERIAL}" != "xtrue" ]; then
+/etc/grub.d/20_memtest86+:94:menuentry '$(gettext_printf "Memory test (memtest86+x64.bin, serial console)")' --class memtest \$menuentry_id_option 'memtest86+-serial' {
+/etc/grub.d/20_memtest86+:96:      printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:98:        linux    $MEMTESTPATH console=${GRUB_MEMTEST_SERIAL_PARAMS}
+/etc/grub.d/20_memtest86+:104: if test -e /boot/memtest86+ia32.bin ; then
+/etc/grub.d/20_memtest86+:105:  MEMTESTPATH=$( make_system_path_relative_to_its_root "/boot/memtest86+ia32.bin" )
+/etc/grub.d/20_memtest86+:106:  echo "Found memtest86+ image: $MEMTESTPATH" >&2
+/etc/grub.d/20_memtest86+:108:menuentry "Memory test (memtest86+ia32.bin)" --class memtest \$menuentry_id_option 'memtest86+' {
+/etc/grub.d/20_memtest86+:110:  printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:112:        linux    $MEMTESTPATH
+/etc/grub.d/20_memtest86+:115:    if [ "x${GRUB_MEMTEST_DISABLE_SERIAL}" != "xtrue" ]; then
+/etc/grub.d/20_memtest86+:117:menuentry '$(gettext_printf "Memory test (memtest86+ia32.bin, serial console)")' --class memtest \$menuentry_id_option 'memtest86+-serial' {
+/etc/grub.d/20_memtest86+:119:      printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/20_memtest86+:121:        linux    $MEMTESTPATH console=${GRUB_MEMTEST_SERIAL_PARAMS}
+/etc/grub.d/25_bli:4:# grub-mkconfig helper script.
+/etc/grub.d/25_bli:5:# Copyright (C) 2023  Free Software Foundation, Inc.
+/etc/grub.d/25_bli:10:# (at your option) any later version.
+/etc/grub.d/25_bli:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/25_bli:15:# GNU General Public License for more details.
+/etc/grub.d/25_bli:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/25_bli:21:if [ "\$grub_platform" = "efi" ]; then
+/etc/grub.d/30_os-prober:4:# grub-mkconfig helper script.
+/etc/grub.d/30_os-prober:5:# Copyright (C) 2006,2007,2008,2009  Free Software Foundation, Inc.
+/etc/grub.d/30_os-prober:10:# (at your option) any later version.
+/etc/grub.d/30_os-prober:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/30_os-prober:15:# GNU General Public License for more details.
+/etc/grub.d/30_os-prober:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/30_os-prober:26:export TEXTDOMAINDIR="${datarootdir}/locale"
+/etc/grub.d/30_os-prober:28:. "$pkgdatadir/grub-mkconfig_lib"
+/etc/grub.d/30_os-prober:33:  if [ "$quick_boot" = 1 ] && [ "x${found_other_os}" != "x" ]; then
+/etc/grub.d/30_os-prober:36:if [ "\${timeout}" = 0 ]; then
+/etc/grub.d/30_os-prober:46:elif [ "x${GRUB_DISABLE_OS_PROBER}" = "xauto" ]; then
+/etc/grub.d/30_os-prober:47:  # UBUNTU: We do not want to disable os-prober on upgrades if we found items before.
+/etc/grub.d/30_os-prober:48:  if test -e /boot/grub/grub.cfg && ! grep -q osprober /boot/grub/grub.cfg; then
+/etc/grub.d/30_os-prober:49:    grub_warn "$(gettext_printf "os-prober will not be executed to detect other bootable partitions.\nSystems on them will not be added to the GRUB boot configuration.\nCheck GRUB_DISABLE_OS_PROBER documentation entry.")"
+/etc/grub.d/30_os-prober:54:if [ "x${GRUB_DISABLE_OS_PROBER}" = "xtrue" ]; then
+/etc/grub.d/30_os-prober:55:  grub_warn "$(gettext_printf "os-prober will not be executed to detect other bootable partitions.\nSystems on them will not be added to the GRUB boot configuration.\nCheck GRUB_DISABLE_OS_PROBER documentation entry.")"
+/etc/grub.d/30_os-prober:59:grub_warn "$(gettext_printf "os-prober will be executed to detect other bootable partitions.\nIts output will be used to detect bootable binaries on them and create new boot entries.")"
+/etc/grub.d/30_os-prober:62:if [ -z "${OSPROBED}" ] ; then
+/etc/grub.d/30_os-prober:69:    if [ x$2 = x32 ]; then
+/etc/grub.d/30_os-prober:71:	bitstr="$(gettext "(32-bit)")"
+/etc/grub.d/30_os-prober:74:	bitstr="$(gettext "(64-bit)")"
+/etc/grub.d/30_os-prober:77:    onstr="$(gettext_printf "(on %s)" "${DEVICE}")"
+/etc/grub.d/30_os-prober:79:menuentry '$(echo "${LONGNAME} $bitstr $onstr" | grub_quote)' --class osx --class darwin --class os \$menuentry_id_option 'osprober-xnu-$2-$(grub_get_device_id "${DEVICE}")'  {
+/etc/grub.d/30_os-prober:82:	prepare_grub_to_access_device ${DEVICE} | grub_add_tab
+/etc/grub.d/30_os-prober:91:        if [ \$do_resume = 0 ]; then
+/etc/grub.d/30_os-prober:92:           xnu_uuid ${OSXUUID} uuid
+/etc/grub.d/30_os-prober:93:           if [ -f /Extra/DSDT.aml ]; then
+/etc/grub.d/30_os-prober:94:              acpi -e /Extra/DSDT.aml
+/etc/grub.d/30_os-prober:97:              $1 /kernelcache boot-uuid=\${uuid} rd=*uuid
+/etc/grub.d/30_os-prober:99:              $1 /System/Library/Kernels/kernel boot-uuid=\${uuid} rd=*uuid
+/etc/grub.d/30_os-prober:102:              $1 /mach_kernel boot-uuid=\${uuid} rd=*uuid
+/etc/grub.d/30_os-prober:103:              if [ /System/Library/Extensions.mkext -nt /System/Library/Extensions ]; then
+/etc/grub.d/30_os-prober:104:                xnu_mkext /System/Library/Extensions.mkext
+/etc/grub.d/30_os-prober:109:           if [ -f /Extra/Extensions.mkext ]; then
+/etc/grub.d/30_os-prober:110:              xnu_mkext /Extra/Extensions.mkext
+/etc/grub.d/30_os-prober:115:           if [ -f /Extra/devprop.bin ]; then
+/etc/grub.d/30_os-prober:116:              xnu_devprop_load /Extra/devprop.bin
+/etc/grub.d/30_os-prober:118:           if [ -f /Extra/splash.jpg ]; then
+/etc/grub.d/30_os-prober:120:              xnu_splash /Extra/splash.jpg
+/etc/grub.d/30_os-prober:122:           if [ -f /Extra/splash.png ]; then
+/etc/grub.d/30_os-prober:124:              xnu_splash /Extra/splash.png
+/etc/grub.d/30_os-prober:126:           if [ -f /Extra/splash.tga ]; then
+/etc/grub.d/30_os-prober:128:              xnu_splash /Extra/splash.tga
+/etc/grub.d/30_os-prober:137:if [ "x$GRUB_TOP_LEVEL_OS_PROBER" != x ]; then
+/etc/grub.d/30_os-prober:138:  OSPROBED=$(grub_move_to_front "$GRUB_TOP_LEVEL_OS_PROBER" ${OSPROBED})
+/etc/grub.d/30_os-prober:141:for OS in ${OSPROBED} ; do
+/etc/grub.d/30_os-prober:142:  DEVICE="`echo ${OS} | cut -d ':' -f 1`"
+/etc/grub.d/30_os-prober:143:  LONGNAME="`echo ${OS} | cut -d ':' -f 2 | tr '^' ' '`"
+/etc/grub.d/30_os-prober:144:  LABEL="`echo ${OS} | cut -d ':' -f 3 | tr '^' ' '`"
+/etc/grub.d/30_os-prober:145:  BOOT="`echo ${OS} | cut -d ':' -f 4`"
+/etc/grub.d/30_os-prober:146:  if UUID="`${grub_probe} --target=fs_uuid --device ${DEVICE%@*}`"; then
+/etc/grub.d/30_os-prober:147:    EXPUUID="$UUID"
+/etc/grub.d/30_os-prober:149:    if [ x"${DEVICE#*@}" != x ] ; then
+/etc/grub.d/30_os-prober:150:      EXPUUID="${EXPUUID}@${DEVICE#*@}"
+/etc/grub.d/30_os-prober:153:    if [ "x${GRUB_OS_PROBER_SKIP_LIST}" != "x" ] && [ "x`echo ${GRUB_OS_PROBER_SKIP_LIST} | grep -i -e '\b'${EXPUUID}'\b'`" != "x" ] ; then
+/etc/grub.d/30_os-prober:154:      echo "Skipped ${LONGNAME} on ${DEVICE} by user request." >&2
+/etc/grub.d/30_os-prober:159:  BTRFS="`echo ${OS} | cut -d ':' -f 5`"
+/etc/grub.d/30_os-prober:160:  if [ "x$BTRFS" = "xbtrfs" ]; then
+/etc/grub.d/30_os-prober:161:	BTRFSuuid="`echo ${OS} | cut -d ':' -f 6`"
+/etc/grub.d/30_os-prober:162:	BTRFSsubvol="`echo ${OS} | cut -d ':' -f 7`"
+/etc/grub.d/30_os-prober:165:  if [ -z "${LONGNAME}" ] ; then
+/etc/grub.d/30_os-prober:166:    LONGNAME="${LABEL}"
+/etc/grub.d/30_os-prober:170:  CLASS="--class $(echo "${LABEL}" | LC_ALL=C sed 's,[[:digit:]]*$,,' | cut -d' ' -f1 | tr 'A-Z' 'a-z' | LC_ALL=C sed 's,[^[:alnum:]_],_,g')"
+/etc/grub.d/30_os-prober:172:  gettext_printf "Found %s on %s\n" "${LONGNAME}" "${DEVICE}" >&2
+/etc/grub.d/30_os-prober:174:  case ${BOOT} in
+/etc/grub.d/30_os-prober:177:	  onstr="$(gettext_printf "(on %s)" "${DEVICE}")"
+/etc/grub.d/30_os-prober:179:menuentry '$(echo "${LONGNAME} $onstr" | grub_quote)' $CLASS --class os \$menuentry_id_option 'osprober-chain-$(grub_get_device_id "${DEVICE}")' {
+/etc/grub.d/30_os-prober:182:      prepare_grub_to_access_device ${DEVICE} | grub_add_tab
+/etc/grub.d/30_os-prober:184:      if [ x"`${grub_probe} --device ${DEVICE} --target=partmap`" = xmsdos ]; then
+/etc/grub.d/30_os-prober:186:	parttool \${root} hidden-
+/etc/grub.d/30_os-prober:190:      case ${LONGNAME} in
+/etc/grub.d/30_os-prober:195:	drivemap -s (hd0) \${root}
+/etc/grub.d/30_os-prober:208:	EFIPATH=${DEVICE#*@}
+/etc/grub.d/30_os-prober:209:	DEVICE=${DEVICE%@*}
+/etc/grub.d/30_os-prober:210:	onstr="$(gettext_printf "(on %s)" "${DEVICE}")"
+/etc/grub.d/30_os-prober:212:menuentry '$(echo "${LONGNAME} $onstr" | grub_quote)' $CLASS --class os \$menuentry_id_option 'osprober-efi-$(grub_get_device_id "${DEVICE}")' {
+/etc/grub.d/30_os-prober:215:      prepare_grub_to_access_device ${DEVICE} | sed -e "s/^/\t/"
+/etc/grub.d/30_os-prober:218:	chainloader ${EFIPATH}
+/etc/grub.d/30_os-prober:223:      if [ "x$BTRFS" = "xbtrfs" ]; then
+/etc/grub.d/30_os-prober:224:         LINUXPROBED="`linux-boot-prober btrfs ${BTRFSuuid} ${BTRFSsubvol}  2> /dev/null | tr ' ' '^' | paste -s -d ' '`"
+/etc/grub.d/30_os-prober:226:         LINUXPROBED="`linux-boot-prober ${DEVICE} 2> /dev/null | tr ' ' '^' | paste -s -d ' '`"
+/etc/grub.d/30_os-prober:232:      OS="${LONGNAME}"
+/etc/grub.d/30_os-prober:234:      for LINUX in ${LINUXPROBED} ; do
+/etc/grub.d/30_os-prober:235:        LROOT="`echo ${LINUX} | cut -d ':' -f 1`"
+/etc/grub.d/30_os-prober:236:        LBOOT="`echo ${LINUX} | cut -d ':' -f 2`"
+/etc/grub.d/30_os-prober:237:        LLABEL="`echo ${LINUX} | cut -d ':' -f 3 | tr '^' ' '`"
+/etc/grub.d/30_os-prober:238:        LKERNEL="`echo ${LINUX} | cut -d ':' -f 4`"
+/etc/grub.d/30_os-prober:239:        LINITRD="`echo ${LINUX} | cut -d ':' -f 5 | tr '^' ' '`"
+/etc/grub.d/30_os-prober:240:        LPARAMS="`echo ${LINUX} | cut -d ':' -f 6- | tr '^' ' '`"
+/etc/grub.d/30_os-prober:242:        if [ -z "${LLABEL}" ] ; then
+/etc/grub.d/30_os-prober:243:          LLABEL="${LONGNAME}"
+/etc/grub.d/30_os-prober:246:	if [ "${LROOT}" != "${LBOOT}" ]; then
+/etc/grub.d/30_os-prober:247:	  LKERNEL="${LKERNEL#/boot}"
+/etc/grub.d/30_os-prober:248:	  LINITRD="${LINITRD#/boot}"
+/etc/grub.d/30_os-prober:251:	if [ -z "${prepare_boot_cache}" ]; then
+/etc/grub.d/30_os-prober:252:	  prepare_boot_cache="$(prepare_grub_to_access_device ${LBOOT} | grub_add_tab)"
+/etc/grub.d/30_os-prober:253:	  [ "${prepare_boot_cache}" ] || continue
+/etc/grub.d/30_os-prober:257:	onstr="$(gettext_printf "(on %s)" "${DEVICE}")"
+/etc/grub.d/30_os-prober:258:	recovery_params="$(echo "${LPARAMS}" | grep 'single\|recovery')" || true
+/etc/grub.d/30_os-prober:260:	while echo "$used_osprober_linux_ids" | grep 'osprober-gnulinux-$LKERNEL-${recovery_params}-$counter-$boot_device_id' > /dev/null; do
+/etc/grub.d/30_os-prober:261:	    counter=$((counter+1));
+/etc/grub.d/30_os-prober:263:	if [ -z "$boot_device_id" ]; then
+/etc/grub.d/30_os-prober:264:	    boot_device_id="$(grub_get_device_id "${DEVICE}")"
+/etc/grub.d/30_os-prober:266:	used_osprober_linux_ids="$used_osprober_linux_ids 'osprober-gnulinux-$LKERNEL-${recovery_params}-$counter-$boot_device_id'"
+/etc/grub.d/30_os-prober:270:	# enable it. This caused a lot of confusion to users that set the option to 'y',
+/etc/grub.d/30_os-prober:271:	# 'yes' or 'true'. This was fixed but all of these values must be supported now.
+/etc/grub.d/30_os-prober:272:	if [ "x${GRUB_DISABLE_SUBMENU}" = xyes ] || [ "x${GRUB_DISABLE_SUBMENU}" = xy ]; then
+/etc/grub.d/30_os-prober:276:	if [ "x$is_top_level" = xtrue ] && [ "x${GRUB_DISABLE_SUBMENU}" != xtrue ]; then
+/etc/grub.d/30_os-prober:278:menuentry '$(echo "$OS $onstr" | grub_quote)' $CLASS --class gnu-linux --class gnu --class os \$menuentry_id_option 'osprober-gnulinux-simple-$boot_device_id' {
+/etc/grub.d/30_os-prober:281:	    printf '%s\n' "${prepare_boot_cache}"
+/etc/grub.d/30_os-prober:283:	linux ${LKERNEL} ${LPARAMS}
+/etc/grub.d/30_os-prober:285:            if [ -n "${LINITRD}" ] ; then
+/etc/grub.d/30_os-prober:287:	initrd ${LINITRD}
+/etc/grub.d/30_os-prober:293:	    echo "submenu '$(gettext_printf "Advanced options for %s" "${OS} $onstr" | grub_quote)' \$menuentry_id_option 'osprober-gnulinux-advanced-$boot_device_id' {"
+/etc/grub.d/30_os-prober:296:	title="${LLABEL} $onstr"
+/etc/grub.d/30_os-prober:298:	menuentry '$(echo "$title" | grub_quote)' --class gnu-linux --class gnu --class os \$menuentry_id_option 'osprober-gnulinux-$LKERNEL-${recovery_params}-$boot_device_id' {
+/etc/grub.d/30_os-prober:300:	save_default_entry | sed -e "s/^/$grub_tab$grub_tab/"
+/etc/grub.d/30_os-prober:301:	printf '%s\n' "${prepare_boot_cache}" | grub_add_tab
+/etc/grub.d/30_os-prober:303:		linux ${LKERNEL} ${LPARAMS}
+/etc/grub.d/30_os-prober:305:        if [ -n "${LINITRD}" ] ; then
+/etc/grub.d/30_os-prober:307:		initrd ${LINITRD}
+/etc/grub.d/30_os-prober:313:	if [ x"$title" = x"$GRUB_ACTUAL_DEFAULT" ] || [ x"Previous Linux versions>$title" = x"$GRUB_ACTUAL_DEFAULT" ]; then
+/etc/grub.d/30_os-prober:314:	    replacement_title="$(echo "Advanced options for ${OS} $onstr" | sed 's,>,>>,g')>$(echo "$title" | sed 's,>,>>,g')"
+/etc/grub.d/30_os-prober:315:	    quoted="$(echo "$GRUB_ACTUAL_DEFAULT" | grub_quote)"
+/etc/grub.d/30_os-prober:316:	    title_correction_code="${title_correction_code}if [ \"x\$default\" = '$quoted' ]; then default='$(echo "$replacement_title" | grub_quote)'; fi;"
+/etc/grub.d/30_os-prober:317:	    grub_warn "$(gettext_printf "Please don't use old title \`%s' for GRUB_DEFAULT, use \`%s' (for versions before 2.00) or \`%s' (for 2.00 or later)" "$GRUB_ACTUAL_DEFAULT" "$replacement_title" "gnulinux-advanced-$boot_device_id>gnulinux-$version-$type-$boot_device_id")"
+/etc/grub.d/30_os-prober:320:      if [ x"$is_top_level" != xtrue ]; then
+/etc/grub.d/30_os-prober:323:      echo "$title_correction_code"
+/etc/grub.d/30_os-prober:326:      if [ "${UUID}" ]; then
+/etc/grub.d/30_os-prober:327:	OSXUUID="${UUID}"
+/etc/grub.d/30_os-prober:334:      onstr="$(gettext_printf "(on %s)" "${DEVICE}")"
+/etc/grub.d/30_os-prober:336:menuentry '$(echo "${LONGNAME} $onstr" | grub_quote)' --class hurd --class gnu --class os \$menuentry_id_option 'osprober-gnuhurd-/boot/gnumach.gz-false-$(grub_get_device_id "${DEVICE}")' {
+/etc/grub.d/30_os-prober:339:      prepare_grub_to_access_device ${DEVICE} | grub_add_tab
+/etc/grub.d/30_os-prober:340:      grub_device="`${grub_probe} --device ${DEVICE} --target=drive`"
+/etc/grub.d/30_os-prober:341:      mach_device="`echo "${grub_device}" | sed -e 's/(\(hd.*\),msdos\(.*\))/\1s\2/'`"
+/etc/grub.d/30_os-prober:342:      grub_fs="`${grub_probe} --device ${DEVICE} --target=fs`"
+/etc/grub.d/30_os-prober:343:      case "${grub_fs}" in
+/etc/grub.d/30_os-prober:344:	*fs)	hurd_fs="${grub_fs}" ;;
+/etc/grub.d/30_os-prober:345:	*)	hurd_fs="${grub_fs}fs" ;;
+/etc/grub.d/30_os-prober:348:	multiboot /boot/gnumach.gz root=device:${mach_device}
+/etc/grub.d/30_os-prober:349:	module /hurd/${hurd_fs}.static ${hurd_fs} --readonly \\
+/etc/grub.d/30_os-prober:350:			--multiboot-command-line='\${kernel-command-line}' \\
+/etc/grub.d/30_os-prober:351:			--host-priv-port='\${host-port}' \\
+/etc/grub.d/30_os-prober:352:			--device-master-port='\${device-port}' \\
+/etc/grub.d/30_os-prober:353:			--exec-server-task='\${exec-task}' -T typed '\${root}' \\
+/etc/grub.d/30_os-prober:354:			'\$(task-create)' '\$(task-resume)'
+/etc/grub.d/30_os-prober:355:	module /lib/ld.so.1 exec /hurd/exec '\$(exec-task=task-create)'
+/etc/grub.d/30_os-prober:361:menuentry "${LONGNAME} (on ${DEVICE}, Multiboot)" {
+/etc/grub.d/30_os-prober:364:         prepare_grub_to_access_device ${DEVICE} | sed -e "s/^/\t/"
+/etc/grub.d/30_os-prober:371:      # TRANSLATORS: %s is replaced by OS name.
+/etc/grub.d/30_os-prober:372:      gettext_printf "%s is not yet supported by grub-mkconfig.\n" "  ${LONGNAME}" >&2
+/etc/grub.d/30_uefi-firmware:4:# grub-mkconfig helper script.
+/etc/grub.d/30_uefi-firmware:5:# Copyright (C) 2020  Free Software Foundation, Inc.
+/etc/grub.d/30_uefi-firmware:10:# (at your option) any later version.
+/etc/grub.d/30_uefi-firmware:14:# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/etc/grub.d/30_uefi-firmware:15:# GNU General Public License for more details.
+/etc/grub.d/30_uefi-firmware:18:# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+/etc/grub.d/30_uefi-firmware:25:export TEXTDOMAINDIR="${datarootdir}/locale"
+/etc/grub.d/30_uefi-firmware:27:. "$pkgdatadir/grub-mkconfig_lib"
+/etc/grub.d/30_uefi-firmware:31:gettext_printf "Adding boot menu entry for UEFI Firmware Settings ...\n" >&2
+/etc/grub.d/30_uefi-firmware:34:if [ "\$grub_platform" = "efi" ]; then
+/etc/grub.d/30_uefi-firmware:36:	if [ "\$?" = 0 ]; then
+/etc/grub.d/30_uefi-firmware:37:		menuentry '$LABEL' \$menuentry_id_option 'uefi-firmware' {
+/etc/grub.d/35_fwupd:2:# SPDX-License-Identifier: LGPL-2.1+
+/etc/grub.d/35_fwupd:5:[ -d ${pkgdatadir:?} ]
+/etc/grub.d/35_fwupd:7:. "$pkgdatadir/grub-mkconfig_lib"
+/etc/grub.d/35_fwupd:9:if [ -f /var/lib/fwupd/uefi_capsule.conf ] &&
+/etc/grub.d/35_fwupd:11:      . /var/lib/fwupd/uefi_capsule.conf
+/etc/grub.d/35_fwupd:12:      if [ "${EFI_PATH}" != "" ] && [ "${ESP}" != "" ]; then
+/etc/grub.d/35_fwupd:15:menuentry 'Linux Firmware Updater' \$menuentry_id_option 'fwupd' {
+/etc/grub.d/35_fwupd:17:      ${grub_probe:?} --version > /dev/null
+/etc/grub.d/35_fwupd:18:      prepare_grub_to_access_device "$(${grub_probe} --target=device ${ESP})" | sed -e "s/^/\t/"
+/etc/grub.d/35_fwupd:20:	chainloader ${EFI_PATH}
+/etc/grub.d/40_custom:2:exec tail -n +3 $0
+/etc/grub.d/40_custom:3:# This file provides an easy way to add custom menu entries.  Simply type the
+/etc/grub.d/40_custom:4:# menu entries you want to add after this comment.  Be careful not to change
+/etc/grub.d/40_custom:5:# the 'exec tail' line above.
+/etc/grub.d/40_custom:10:    search --no-floppy --fs-uuid --set=root $(blkid -s UUID -o value /dev/nvme0n1p1)
+/etc/grub.d/40_custom:11:    chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+/etc/grub.d/41_custom:3:if [ -f  \${config_directory}/custom.cfg ]; then
+/etc/grub.d/41_custom:4:  source \${config_directory}/custom.cfg
+/etc/grub.d/41_custom:5:elif [ -z "\${config_directory}" -a -f  \$prefix/custom.cfg ]; then
+/etc/grub.d/41_custom:6:  source \$prefix/custom.cfg
+/etc/grub.d/README:2:All executable files in this directory are processed in shell expansion order.
+/etc/grub.d/README:4:  00_*: Reserved for 00_header.
+/etc/grub.d/README:5:  10_*: Native boot entries.
+/etc/grub.d/README:6:  20_*: Third party apps (e.g. memtest86+).
+/etc/grub.d/README:9:administrator.  For example, you can add an entry to boot another OS as
+/etc/grub.d/README:11:the menu; and then adjust the default setting via /etc/default/grub.
+
