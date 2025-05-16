@@ -1,3 +1,7 @@
 {
-    "liveServer.settings.port": 5502
+    	"liveServer.settings.port": 5502,
+ 	 "python.defaultInterpreterPath": "~/my_venv/bin/python3.12",
+  "python.terminal.activateEnvironment": true
+
+
 }
