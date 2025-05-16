@@ -3,13 +3,6 @@
 A collection of my solutions to **Data Structures & Algorithms** problems from platforms like LeetCode, Codeforces, and GeeksforGeeks. Organized by topic for easy reference.
 
 ## 📂 **Structure**
-repo/
-├── Arrays/ # Array & String problems
-├── Linked_Lists/ # Linked List implementations
-├── Trees/ # Binary Trees, BST, etc.
-├── Graphs/ # DFS, BFS, Shortest Path
-├── Dynamic_Programming/ # DP solutions
-└── ... # Other categories
 
 
 ## 🛠 **Languages Used**
