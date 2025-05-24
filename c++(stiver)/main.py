@@ -1,8 +1,12 @@
+nums = [3, 3, 0, 99, -40]
 
-num = 12341
-rev = 0
-original = num
+def largestElement(nums):
+        for i in range(len(nums)):
+            for j in range(i, len(nums)-i-1):
+                if nums[j] > nums[j+1]:
+                    nums[j], nums[j+1] = nums[j+1], nums[j]
 
-while num> 0:
-    rev = rev*10 + num %10
+        return nums[len(nums)-1]   
 
+a  = largestElement(nums)
+print(a)
