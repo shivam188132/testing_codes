@@ -1,12 +1,8 @@
-nums = [3, 3, 0, 99, -40]
+import kagglehub
 
-def largestElement(nums):
-        for i in range(len(nums)):
-            for j in range(i, len(nums)-i-1):
-                if nums[j] > nums[j+1]:
-                    nums[j], nums[j+1] = nums[j+1], nums[j]
+# Download latest version
+path = kagglehub.dataset_download("siddharth0935/himalayan-expeditions")
 
-        return nums[len(nums)-1]   
+print("Path to dataset files:", path)
 
-a  = largestElement(nums)
-print(a)
+# Path to dataset files: /home/shivam/.cache/kagglehub/datasets/siddharth0935/himalayan-expeditions/versions/1
